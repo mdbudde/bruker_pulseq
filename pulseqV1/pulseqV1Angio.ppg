@@ -1,0 +1,158 @@
+;****************************************************************
+;
+; Copyright (c) 2001 - 2003
+; Bruker BioSpin MRI GmbH
+; D-76275 Ettlingen, Germany
+;
+; All Rights Reserved
+; 
+; FLASH - a gradient echo imaging method
+;
+;****************************************************************
+;
+; d0 - TR padding
+; d1 - T1 padding
+; d2 - T2 padding
+; d3 = PVM_RiseTime
+; d4 = PVM_RampTime
+; d8 = SCON / BLKTR_MAN (Amplifier preblanking)
+
+#include <MRI.include>
+preset off
+
+define delay denab
+
+define list<phase> phaselist = {$RFPhaseList}
+define list<frequency> fq1list = {$ACQ_O1_list}
+
+"denab =  d3 - de"
+
+#include <PrepModulesHead.mod> 
+
+subr FlowSatInit()
+
+INIT_DEVICES
+
+#define r2d ACQ_spatial_phase_1
+#define r3d ACQ_spatial_phase_2
+
+grad_zero_for_gs <r2d, r3d>
+
+
+        10u recph ph1
+start,  10u fq8(receive):f1
+
+if(PVM_BlBloodOnOff)
+{
+  subr TriggerPhase()
+}
+subr BlBlood(ph0)
+
+subr TriggerPhase()
+subr SliceSelIr()
+
+subr Tagging()
+
+;----------------------------------start of the main loop ----------
+slice, 	 5u  
+subr TriggerSlice()
+
+;----------------------------------handle dummy scans --------------
+if( l5 >= 1)   ;dummy scans
+{
+dummy, 30u
+;----------------------------------preparation modules -------------
+subr FlowSat()
+subr FovSat()
+subr MagTrans()
+subr FatSup()
+
+        d6	grad_ramp{0, 0, g9}
+;----------------------------------slice selection------------------	
+	d3 	grad_ramp{0, 0, g0}  fq1list:f1
+        d8	gatepulse 1
+	(p0:sp0 phaselist):f1
+	d4 	grad_off
+;--------------------slice rephase, read dephase, phase encoding----
+	d10 	grad_ramp{g2, r2d*g3, g1+r3d*g4}
+	d2 	grad_off
+;----------------------------------frequency encoding---------------
+        d3      grad_ramp{g5, 0, 0} 
+        aqq	
+;----------------------------------read spoiler + phase encoding----
+        d11     grad_ramp{g6, r2d*g7, r3d*g8} ; 2nd and 3rd dims
+	d12     grad_ramp{g6, 0, 0}
+	d3	grad_off
+        d0	
+        1u      phaselist.inc    ;phase list for RF spoiling
+        lo to dummy times l5
+}
+
+acquisition, 10u
+	     20u reload B0
+;----------------------------------preparation modules -------------
+subr FlowSat()
+subr FovSat()
+subr MagTrans()
+subr FatSup()
+
+        d6	grad_ramp{0, 0, g9}
+;----------------------------------slice selection------------------	
+	d3 	grad_ramp{0, 0, g0}  fq1list:f1
+        d8	gatepulse 1
+	(p0:sp0 phaselist):f1
+	d4 	grad_off
+;--------------------slice rephase, read dephase, phase encoding----
+	d10 	grad_ramp{g2, r2d*g3, g1+r3d*g4}
+	d2 	grad_off
+;----------------------------------frequency encoding---------------
+        denab   grad_ramp{g5, 0, 0} 
+	ADC_INIT_B(NOPH, phaselist)  ;ph1 is used (see recph)
+        aqq	ADC_START	
+;----------------------------------read spoiler + phase encoding----
+        d11     grad_ramp{g6, r2d*g7, r3d*g8} ; 2nd and 3rd dims
+	d12     grad_ramp{g6, 0, 0}
+	d3	grad_off
+        d0	ADC_END
+        1u      phaselist.inc    ;phase list for RF spoiling
+;----------------------------------2d loop--------------------------
+	r2d.inc
+	lo to acquisition times l1
+;------------------------slice and movie loop-----------------------	
+if(NI > 1)
+{
+        subr FlowSatInc()
+	2.5u grad_matrix.inc  fq1list.inc
+	lo to start times NI
+}
+;----------------------------------averaging loop-------------------
+if(NA > 1)
+{
+	lo to start times NA
+}
+        d20
+;----------------------------------3d loop--------------------------
+	r3d.inc
+	lo to start times l2
+        2.5u
+        lo to start times NAE
+        2.5u
+        subr Evolution()
+        2.5u
+        lo to start times NR
+SETUP_GOTO(start)
+
+exit
+
+ph0 = 0
+ph1 = 0 
+
+
+
+
+	
+
+
+
+
+
