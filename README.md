@@ -1,5 +1,5 @@
 # bruker_pulseq
-bruker method to run pulseq files on paravision (6.0.1)
+bruker method to run pulseq files on paravision
 
 
 Bruker Paravision (6.0.1) method file to run pulseq files.
