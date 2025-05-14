@@ -1,5 +1,5 @@
 # -------------------------------------------------------------
-# /pvVersions/linux_intel/Pv601/prog/parx/src/pulseqV1/Makefile
+# /pvVersions/linux_intel/Pv601/prog/parx/src/bruker_pulseq/Makefile
 # 
 # Copyright (c) 2001-2011
 # Bruker BioSpin MRI GmbH
@@ -437,11 +437,11 @@ all::
 showppg ::
 	@if [ "$(PULPROG)" != "none" ]; then echo $(notdir $PULPROG); fi
 
-OVERLAY		= pulseqV1
+OVERLAY		= bruker_pulseq
 PULPROG		= none
 PULPROG_INC	=
 
-SRCDIR		= $(EXECDISKUNIT)/prog/curdir/$(USER)/ParaVision/methods/src/pulseqV1
+SRCDIR		= $(EXECDISKUNIT)/prog/curdir/$(USER)/ParaVision/methods/src/bruker_pulseq
 
 INCPATH		= -I.
 
@@ -621,68 +621,9 @@ docu::
 # -------------------------------------------------------------
 
 # DO NOT DELETE THIS LINE -- make depend depends on it
-pulseqV1.o: \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/pulseqV1.c \
- /opt/PV6.0.1/prog/include/bruktyp.h /opt/PV6.0.1/prog/include/acqutyp.h \
- /opt/PV6.0.1/prog/include/gradient_ramp_typ.h \
- /opt/PV6.0.1/prog/include/acqumtyp.h /opt/PV6.0.1/prog/include/acqutyp.h \
- /opt/PV6.0.1/prog/include/Parx/Dynenum.h \
- /opt/PV6.0.1/prog/include/recotyp.h \
- /opt/PV6.0.1/prog/include/Reco/RecoStageTyp.h \
- /opt/PV6.0.1/prog/include/subjtyp.h \
- /opt/PV6.0.1/prog/include/generated/ParxDefs.h \
- /opt/PV6.0.1/prog/include/ta_config.h \
- /opt/PV6.0.1/prog/include/methodTypes.h \
- /opt/PV6.0.1/prog/include/PvmTypes/publicPvmTypes.h \
- /opt/PV6.0.1/prog/include/Parx/Dynenum.h \
- /opt/PV6.0.1/prog/include/lib/PvSysinfoClient_state.h \
- /opt/PV6.0.1/prog/include/adjManagerTypes.h \
- /opt/PV6.0.1/prog/include/bruktyp.h \
- /opt/PV6.0.1/prog/include/PvUtil/TimeDefs.h \
- /opt/PV6.0.1/prog/include/adjManagerDefs.h \
- /opt/PV6.0.1/prog/include/generated/DataPath.h \
- /opt/PV6.0.1/prog/include/generated/KeyUids.h \
- /opt/PV6.0.1/prog/include/PvCfg/ResultParsType.h \
- /opt/PV6.0.1/prog/include/PvUtil/TimeDefs.h \
- /opt/PV6.0.1/prog/include/generated/DataPath.h \
- /opt/PV6.0.1/prog/include/generated/KeyUids.h \
- /opt/PV6.0.1/prog/include/adjManagerDefs.h \
- /opt/PV6.0.1/prog/include/PvmTypes/geotyp.h \
- /opt/PV6.0.1/prog/include/pvidl.h \
- /opt/PV6.0.1/prog/include/generated/GeoObjIds.h \
- /opt/PV6.0.1/prog/include/generated/ParxDefs.h \
- /opt/PV6.0.1/prog/include/PvmTypes/ReportTypes.h \
- /opt/PV6.0.1/prog/include/generated/ParImport.h \
- /opt/PV6.0.1/prog/include/PvmTypes/wobbleTypes.h \
- /opt/PV6.0.1/prog/include/PvmTypes/epiTypes.h \
- /opt/PV6.0.1/prog/include/PvmTypes/SpiralTypes.h \
- /opt/PV6.0.1/prog/include/PvmTypes/TrajectoryTypes.h \
- /opt/PV6.0.1/prog/include/PvmTypes/internalPvmTypes.h \
- /opt/PV6.0.1/prog/include/PvmTypes/SpiralTypesInternal.h \
- /opt/PV6.0.1/prog/include/Visu/VisuTypes.h \
- /opt/PV6.0.1/prog/include/Visu/VisuDefines.h \
- /opt/PV6.0.1/prog/include/generated/VisuIds.h \
- /opt/PV6.0.1/prog/include/proto/acq_extern.h \
- /opt/PV6.0.1/prog/include/proto/subj_extern.h \
- /opt/PV6.0.1/prog/include/proto/pvm_extern.h \
- /opt/PV6.0.1/prog/include/proto/visu_extern.h \
- /opt/PV6.0.1/prog/include/methodFormat.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/parsTypes.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/parsDefinition.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/pulseqPars.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/pulseqTypes.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/callbackDefs.h \
- /opt/PV6.0.1/prog/include/methodClassDefs.h \
- /opt/PV6.0.1/prog/include/digitizerClassDefs.h \
- /opt/PV6.0.1/prog/include/epiClassDefs.h \
- /opt/PV6.0.1/prog/include/SpiralCls.h \
- /opt/PV6.0.1/prog/include/TrajectoryCls.h \
- /opt/PV6.0.1/prog/include/diffusionClassDefs.h \
- /opt/PV6.0.1/prog/include/modulesClassDefs.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/parsLayout.h
 initMeth.o: \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/initMeth.c \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/method.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/initMeth.c \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/method.h \
  /opt/PV6.0.1/prog/include/pvmachine.h \
  /opt/PV6.0.1/prog/include/machine.h /opt/PV6.0.1/prog/include/pvidl.h \
  /opt/PV6.0.1/prog/include/generated/PvSystem.h \
@@ -746,12 +687,12 @@ initMeth.o: \
  /opt/PV6.0.1/prog/include/ovl_toolbox/Utils.h \
  /opt/PV6.0.1/prog/include/PvUtil/PvUtil.h \
  /opt/PV6.0.1/prog/include/machine.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/parsTypes.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos_p.h
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/parsTypes.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/relProtos.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/relProtos_p.h
 loadMeth.o: \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/loadMeth.c \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/method.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/loadMeth.c \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/method.h \
  /opt/PV6.0.1/prog/include/pvmachine.h \
  /opt/PV6.0.1/prog/include/machine.h /opt/PV6.0.1/prog/include/pvidl.h \
  /opt/PV6.0.1/prog/include/generated/PvSystem.h \
@@ -815,12 +756,12 @@ loadMeth.o: \
  /opt/PV6.0.1/prog/include/ovl_toolbox/Utils.h \
  /opt/PV6.0.1/prog/include/PvUtil/PvUtil.h \
  /opt/PV6.0.1/prog/include/machine.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/parsTypes.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos_p.h
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/parsTypes.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/relProtos.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/relProtos_p.h
 parsRelations.o: \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/parsRelations.c \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/method.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/parsRelations.c \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/method.h \
  /opt/PV6.0.1/prog/include/pvmachine.h \
  /opt/PV6.0.1/prog/include/machine.h /opt/PV6.0.1/prog/include/pvidl.h \
  /opt/PV6.0.1/prog/include/generated/PvSystem.h \
@@ -884,12 +825,12 @@ parsRelations.o: \
  /opt/PV6.0.1/prog/include/ovl_toolbox/Utils.h \
  /opt/PV6.0.1/prog/include/PvUtil/PvUtil.h \
  /opt/PV6.0.1/prog/include/machine.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/parsTypes.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos_p.h
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/parsTypes.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/relProtos.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/relProtos_p.h
 BaseLevelRelations.o: \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/BaseLevelRelations.c \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/method.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/BaseLevelRelations.c \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/method.h \
  /opt/PV6.0.1/prog/include/pvmachine.h \
  /opt/PV6.0.1/prog/include/machine.h /opt/PV6.0.1/prog/include/pvidl.h \
  /opt/PV6.0.1/prog/include/generated/PvSystem.h \
@@ -953,12 +894,12 @@ BaseLevelRelations.o: \
  /opt/PV6.0.1/prog/include/ovl_toolbox/Utils.h \
  /opt/PV6.0.1/prog/include/PvUtil/PvUtil.h \
  /opt/PV6.0.1/prog/include/machine.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/parsTypes.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos_p.h
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/parsTypes.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/relProtos.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/relProtos_p.h
 RecoRelations.o: \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/RecoRelations.c \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/method.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/RecoRelations.c \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/method.h \
  /opt/PV6.0.1/prog/include/pvmachine.h \
  /opt/PV6.0.1/prog/include/machine.h /opt/PV6.0.1/prog/include/pvidl.h \
  /opt/PV6.0.1/prog/include/generated/PvSystem.h \
@@ -1022,12 +963,12 @@ RecoRelations.o: \
  /opt/PV6.0.1/prog/include/ovl_toolbox/Utils.h \
  /opt/PV6.0.1/prog/include/PvUtil/PvUtil.h \
  /opt/PV6.0.1/prog/include/machine.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/parsTypes.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos_p.h
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/parsTypes.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/relProtos.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/relProtos_p.h
 backbone.o: \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/backbone.c \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/method.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/backbone.c \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/method.h \
  /opt/PV6.0.1/prog/include/pvmachine.h \
  /opt/PV6.0.1/prog/include/machine.h /opt/PV6.0.1/prog/include/pvidl.h \
  /opt/PV6.0.1/prog/include/generated/PvSystem.h \
@@ -1091,13 +1032,13 @@ backbone.o: \
  /opt/PV6.0.1/prog/include/ovl_toolbox/Utils.h \
  /opt/PV6.0.1/prog/include/PvUtil/PvUtil.h \
  /opt/PV6.0.1/prog/include/machine.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/parsTypes.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos_p.h
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/parsTypes.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/relProtos.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/relProtos_p.h
 deriveVisu.o: \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/deriveVisu.c \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/deriveVisu.c \
  /opt/PV6.0.1/prog/include/machine.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/method.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/method.h \
  /opt/PV6.0.1/prog/include/pvmachine.h \
  /opt/PV6.0.1/prog/include/machine.h /opt/PV6.0.1/prog/include/pvidl.h \
  /opt/PV6.0.1/prog/include/generated/PvSystem.h \
@@ -1160,15 +1101,15 @@ deriveVisu.o: \
  /opt/PV6.0.1/prog/include/ovl_toolbox/VisuTools.h \
  /opt/PV6.0.1/prog/include/ovl_toolbox/Utils.h \
  /opt/PV6.0.1/prog/include/PvUtil/PvUtil.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/parsTypes.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos_p.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/parsTypes.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/relProtos.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/relProtos_p.h \
  /opt/PV6.0.1/prog/include/Visu/VisuTypes.h \
  /opt/PV6.0.1/prog/include/Visu/VisuDefines.h \
  /opt/PV6.0.1/prog/include/generated/VisuIds.h
 pulseqRelations.o: \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/pulseqRelations.c \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/method.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/pulseqRelations.c \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/method.h \
  /opt/PV6.0.1/prog/include/pvmachine.h \
  /opt/PV6.0.1/prog/include/machine.h /opt/PV6.0.1/prog/include/pvidl.h \
  /opt/PV6.0.1/prog/include/generated/PvSystem.h \
@@ -1232,19 +1173,18 @@ pulseqRelations.o: \
  /opt/PV6.0.1/prog/include/ovl_toolbox/Utils.h \
  /opt/PV6.0.1/prog/include/PvUtil/PvUtil.h \
  /opt/PV6.0.1/prog/include/machine.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/parsTypes.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos_p.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/pulseqTypes.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/pulseq_wrapper.h
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/parsTypes.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/relProtos.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/relProtos_p.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/pulseqTypes.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/pulseq_wrapper.h
 pulseq_wrapper.o: \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/pulseq_wrapper.cpp \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/ExternalSequence.h
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/pulseq_wrapper.cpp \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/ExternalSequence.h
 ExternalSequence.o: \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/ExternalSequence.cpp \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/ExternalSequence.h \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/md5.h
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/ExternalSequence.cpp \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/ExternalSequence.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/md5.h
 md5.o: \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/md5.cpp \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/md5.h
-
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/md5.cpp \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/md5.h
