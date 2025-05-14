@@ -47,7 +47,7 @@ void UpdatePulseq(void) {
 void UpdateSeqList(void)
 {
         char seqpath[100];/* seq directory path   */
-        PvPathMkHomePv(seqpath, NULL);
+        PvPathMkHomePv(seqpath, NULL);  //Create a string  PVINSTDIR/prog/curdir/USER/ParaVision.
         strcat(seqpath,"/exp/lists/seq/");
         
         //Update list of available files
@@ -91,13 +91,8 @@ void PulseqFileHandler(void)
         int MAXCHAR = 100;    
         char seqpath[MAXCHAR];
         
-        char *pvhome= getenv("XWINNMRHOME");        
-        char *user= getenv("USER");
-        
-        strcpy(seqpath, pvhome);
-        strcat(seqpath, "/prog/curdir/");
-        strcat(seqpath, user);
-        strcat(seqpath, "/ParaVision/exp/lists/seq/");      
+        PvPathMkHomePv(seqpath, NULL);
+        strcat(seqpath, "/exp/lists/seq/");      
         strcat(seqpath, seq_file);        
 
 
