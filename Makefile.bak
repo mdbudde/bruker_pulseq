@@ -467,7 +467,7 @@ CPPRELOBJS = pulseq_wrapper$(OBJEXT) ExternalSequence$(OBJEXT) md5$(OBJEXT)
 CPPRELSRCS = $(addprefix $(SRCDIR)/, $(addsuffix  .cpp,  $(basename $(notdir $(CPPRELOBJS)))))
 
 
-LIBS	        = 		  $(SHLIBDIR)/libPvUtil$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvUtilTools$(SHARELIBEXT)                   $(SHLIBDIR)/libPvCfgTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvAcqTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvPvmTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvMrTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvGeoTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvSeqTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvPvmTools$(SHARELIBEXT)                   $(SHLIBDIR)/libPvOvlTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libParxRels$(SHARELIBEXT)
+LIBS	        = 		  $(SHLIBDIR)/libPvUtil$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvUtilTools$(SHARELIBEXT)                   $(SHLIBDIR)/libPvCfgTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvAcqTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvPvmTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvMrTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvGeoTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvSeqTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvPvmTools$(SHARELIBEXT)                   $(SHLIBDIR)/libPvOvlTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libParxRels$(SHARELIBEXT)       $(SHLIBDIR)/libPvPath$(SHARELIBEXT)
 
 LIBRARIES	= 		  -lm
 
@@ -621,6 +621,65 @@ docu::
 # -------------------------------------------------------------
 
 # DO NOT DELETE THIS LINE -- make depend depends on it
+bruker_pulseq.o: \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/bruker_pulseq.c \
+ /opt/PV6.0.1/prog/include/bruktyp.h /opt/PV6.0.1/prog/include/acqutyp.h \
+ /opt/PV6.0.1/prog/include/gradient_ramp_typ.h \
+ /opt/PV6.0.1/prog/include/acqumtyp.h /opt/PV6.0.1/prog/include/acqutyp.h \
+ /opt/PV6.0.1/prog/include/Parx/Dynenum.h \
+ /opt/PV6.0.1/prog/include/recotyp.h \
+ /opt/PV6.0.1/prog/include/Reco/RecoStageTyp.h \
+ /opt/PV6.0.1/prog/include/subjtyp.h \
+ /opt/PV6.0.1/prog/include/generated/ParxDefs.h \
+ /opt/PV6.0.1/prog/include/ta_config.h \
+ /opt/PV6.0.1/prog/include/methodTypes.h \
+ /opt/PV6.0.1/prog/include/PvmTypes/publicPvmTypes.h \
+ /opt/PV6.0.1/prog/include/Parx/Dynenum.h \
+ /opt/PV6.0.1/prog/include/lib/PvSysinfoClient_state.h \
+ /opt/PV6.0.1/prog/include/adjManagerTypes.h \
+ /opt/PV6.0.1/prog/include/bruktyp.h \
+ /opt/PV6.0.1/prog/include/PvUtil/TimeDefs.h \
+ /opt/PV6.0.1/prog/include/adjManagerDefs.h \
+ /opt/PV6.0.1/prog/include/generated/DataPath.h \
+ /opt/PV6.0.1/prog/include/generated/KeyUids.h \
+ /opt/PV6.0.1/prog/include/PvCfg/ResultParsType.h \
+ /opt/PV6.0.1/prog/include/PvUtil/TimeDefs.h \
+ /opt/PV6.0.1/prog/include/generated/DataPath.h \
+ /opt/PV6.0.1/prog/include/generated/KeyUids.h \
+ /opt/PV6.0.1/prog/include/adjManagerDefs.h \
+ /opt/PV6.0.1/prog/include/PvmTypes/geotyp.h \
+ /opt/PV6.0.1/prog/include/pvidl.h \
+ /opt/PV6.0.1/prog/include/generated/GeoObjIds.h \
+ /opt/PV6.0.1/prog/include/generated/ParxDefs.h \
+ /opt/PV6.0.1/prog/include/PvmTypes/ReportTypes.h \
+ /opt/PV6.0.1/prog/include/generated/ParImport.h \
+ /opt/PV6.0.1/prog/include/PvmTypes/wobbleTypes.h \
+ /opt/PV6.0.1/prog/include/PvmTypes/epiTypes.h \
+ /opt/PV6.0.1/prog/include/PvmTypes/SpiralTypes.h \
+ /opt/PV6.0.1/prog/include/PvmTypes/TrajectoryTypes.h \
+ /opt/PV6.0.1/prog/include/PvmTypes/internalPvmTypes.h \
+ /opt/PV6.0.1/prog/include/PvmTypes/SpiralTypesInternal.h \
+ /opt/PV6.0.1/prog/include/Visu/VisuTypes.h \
+ /opt/PV6.0.1/prog/include/Visu/VisuDefines.h \
+ /opt/PV6.0.1/prog/include/generated/VisuIds.h \
+ /opt/PV6.0.1/prog/include/proto/acq_extern.h \
+ /opt/PV6.0.1/prog/include/proto/subj_extern.h \
+ /opt/PV6.0.1/prog/include/proto/pvm_extern.h \
+ /opt/PV6.0.1/prog/include/proto/visu_extern.h \
+ /opt/PV6.0.1/prog/include/methodFormat.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/parsTypes.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/parsDefinition.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/pulseqPars.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/pulseqTypes.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/callbackDefs.h \
+ /opt/PV6.0.1/prog/include/methodClassDefs.h \
+ /opt/PV6.0.1/prog/include/digitizerClassDefs.h \
+ /opt/PV6.0.1/prog/include/epiClassDefs.h \
+ /opt/PV6.0.1/prog/include/SpiralCls.h \
+ /opt/PV6.0.1/prog/include/TrajectoryCls.h \
+ /opt/PV6.0.1/prog/include/diffusionClassDefs.h \
+ /opt/PV6.0.1/prog/include/modulesClassDefs.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/parsLayout.h
 initMeth.o: \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/initMeth.c \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/method.h \
@@ -1188,3 +1247,4 @@ ExternalSequence.o: \
 md5.o: \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/md5.cpp \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/md5.h
+

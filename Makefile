@@ -467,7 +467,7 @@ CPPRELOBJS = pulseq_wrapper$(OBJEXT) ExternalSequence$(OBJEXT) md5$(OBJEXT)
 CPPRELSRCS = $(addprefix $(SRCDIR)/, $(addsuffix  .cpp,  $(basename $(notdir $(CPPRELOBJS)))))
 
 
-LIBS	        = 		  $(SHLIBDIR)/libPvUtil$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvUtilTools$(SHARELIBEXT)                   $(SHLIBDIR)/libPvCfgTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvAcqTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvPvmTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvMrTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvGeoTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvSeqTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvPvmTools$(SHARELIBEXT)                   $(SHLIBDIR)/libPvOvlTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libParxRels$(SHARELIBEXT)
+LIBS	        = 		  $(SHLIBDIR)/libPvUtil$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvUtilTools$(SHARELIBEXT)                   $(SHLIBDIR)/libPvCfgTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvAcqTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvPvmTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvMrTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvGeoTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvSeqTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libPvPvmTools$(SHARELIBEXT)                   $(SHLIBDIR)/libPvOvlTools$(SHARELIBEXT) 		  $(SHLIBDIR)/libParxRels$(SHARELIBEXT)       $(SHLIBDIR)/libPvPath$(SHARELIBEXT)
 
 LIBRARIES	= 		  -lm
 

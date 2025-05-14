@@ -19,14 +19,6 @@ static const char resid[] = "$Id: parsRelations.c,v 1.73.2.1 2013/12/10 16:21:57
 #define DB_MODULE	0
 #define DB_LINE_NR	0
 
-//trick to string-ify PVDIR from makefile
-#define STR_HELPER(x) #x
-#define STR(x) STR_HELPER(x)
-// PVDIR is added as -DPVDIR in Makefile, but if not, just define it here.
-#ifndef PVDIR 
-#define PVDIR /opt/PV6.0.1/  //don't quote since we need the same behavior as the passed -DPVDIR 
-#endif
-
 #define VersionTag "v0.1"
 
 #include "method.h"
@@ -54,15 +46,9 @@ void UpdatePulseq(void) {
 
 void UpdateSeqList(void)
 {
-        char seqpath[100];/* gp directory path   */
-        char *user= getenv("USER");
-        const char *pvdir = STR(PVDIR);
-        //char *pvdir = getenv("XWINNMRHOME");  This could be used, but multiple versions installed in the same system would be an issue
-        strcpy(seqpath, pvdir);
-        //strcpy(shapepath, pvdir);
-        strcat(seqpath, "/prog/curdir/");
-        strcat(seqpath, user);
-        strcat(seqpath, "/ParaVision/exp/lists/seq/");
+        char seqpath[100];/* seq directory path   */
+        PvPathMkHomePv(seqpath, NULL);
+        strcat(seqpath,"/exp/lists/seq/");
         
         //Update list of available files
         PTB_InitDynEnumWithRegFileNames("PulseqFileDynEnum", seqpath);
@@ -189,12 +175,8 @@ int CopyPPGScan()
     
     // user pulse program location
     char scanPpgFile[100];
-    char *user= getenv("USER");
-    const char *pvdir = STR(PVDIR);
-    strcpy(scanPpgFile, pvdir);
-    strcat(scanPpgFile, "/prog/curdir/");
-    strcat(scanPpgFile, user);
-    strcat(scanPpgFile, "/ParaVision/exp/lists/pp/pulseq_scan.ppg");
+    PvPathMkHomePv(scanPpgFile, NULL);
+    strcat(scanPpgFile, "/exp/lists/pp/pulseq_scan.ppg");
         
     printf("scanPpgFile: %s\n", scanPpgFile);
     PARX_sprintf("scanPpgFile: %s\n", scanPpgFile);
