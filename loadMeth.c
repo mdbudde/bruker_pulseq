@@ -36,7 +36,7 @@ static const char resid[] = "$Id: loadMeth.c,v 1.10 2011/05/04 10:54:35 wemch Ex
 void loadMeth(const char *	className)
 /*:=MPE=:=======================================================*/
 {
-  DB_MSG(( "-->FLASH:loadMeth( %s )\n", className ));
+  DB_MSG(( "-->pulseq:loadMeth( %s )\n", className ));
 
 
 
@@ -57,7 +57,7 @@ void loadMeth(const char *	className)
     DB_MSG(( "...ignoring loadMeth call - I don't know this class" ));
   }
 
-  DB_MSG(( "<--FLASH:loadMeth( %s )\n", className ));
+  DB_MSG(( "<--pulseq:loadMeth( %s )\n", className ));
 
 }
 

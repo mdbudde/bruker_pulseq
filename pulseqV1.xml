@@ -12,11 +12,9 @@ Description: Layout of routine parameter editor for method FLASH.
     xmlns:xi="http://www.w3.org/2001/XInclude">
     <parameterCard displayName="Routine">
         <column>
-            <parameter name="PVM_EchoTime"/>
-            <parameter name="PVM_RepetitionTime"/>
-            <parameter name="PVM_NAverages"/>
-            <parameter name="PVM_NRepetitions"/>
+            <parameter name="PulseqFileDynEnum"/> 
             <parameter name="PVM_ScanTimeStr"/>
+            <parameter name="TestPPGfileGen"/>
             <textLine text=""/>
             <parameter name="ExcPulse1.Flipangle" displayName="Flip Angle"/>
         </column>
@@ -27,45 +25,19 @@ Description: Layout of routine parameter editor for method FLASH.
                 <parameter name="PVM_SPackArrReadOrient"/>
             </arrayGroup>
             <parameter name="PVM_SliceThick"/>
-            <parameter name="PVM_Matrix"/>
             <parameter name="PVM_Fov"/>
             <textLine text=""/>
-            <parameter name="PulseqFileDynEnum"/> 
         </column>
     </parameterCard>
     <parameterCard displayName="Contrast">
         <parameterCard displayName="Main">
             <column>
-                <parameter name="PVM_EchoTime"/>
-                <parameter name="PVM_RepetitionTime"/>
                 <parameter name="ExcPulse1.Flipangle" displayName="Flip Angle"/>
-                <parameter name="PVM_DummyScans"/>
-                <parameter name="PVM_DummyScansDur"/>
-                <parameter name="PVM_NMovieFrames"/>
-                <parameter name="PVM_MotionSupOnOff"/>
-                <parameter name="RFSpoiling"/>
-                <parameter name="AngioMode"/>
             </column>
             <column>
-                <parameter name="PVM_FatSupOnOff"/>
-                <parameter name="PVM_FovSatOnOff"/>
-                <parameter name="PVM_SelIrOnOff"/>
-                <parameter name="PVM_MagTransOnOff"/>
-                <parameter name="PVM_InFlowSatOnOff"/>
-                <parameter name="PVM_TaggingOnOff"/>
-                <parameter name="PVM_BlBloodOnOff"/>
-                <parameter name="PVM_EvolutionOnOff"/>
                 <parameter name="PVM_TriggerModule"/>
             </column>
         </parameterCard>
-        <xi:include href="file:///XML_INCLUDE_DIR/FatSup.xml"/>
-        <xi:include href="file:///XML_INCLUDE_DIR/FovSat.xml"/>
-        <xi:include href="file:///XML_INCLUDE_DIR/SelIr.xml"/>
-        <xi:include href="file:///XML_INCLUDE_DIR/MTC.xml"/>
-        <xi:include href="file:///XML_INCLUDE_DIR/FlowSat.xml"/>
-        <xi:include href="file:///XML_INCLUDE_DIR/Tagging.xml"/>
-        <xi:include href="file:///XML_INCLUDE_DIR/BlackBlood.xml"/>
-        <xi:include href="file:///XML_INCLUDE_DIR/Evolution.xml"/>
         <xi:include href="file:///XML_INCLUDE_DIR/Trigg.xml"/>
     </parameterCard>
     <parameterCard displayName="Resolution">
@@ -103,7 +75,6 @@ Description: Layout of routine parameter editor for method FLASH.
             <column>
                 <textLine text=""/>
                 <parameter name="PVM_EffSWh"/>
-                <parameter name="PVM_EchoPosition"/>
                 <parameter name="ExcPulse1Enum" displayName="Excitation Pulse">
                     <parameterCard displayName="Pulse Details">
                         <column>
@@ -111,26 +82,10 @@ Description: Layout of routine parameter editor for method FLASH.
                         </column>
                     </parameterCard>
                 </parameter>
-                <parameter name="ReadSpoiler.automatic" displayName="Auto Read Spoiler">
-                    <parameterCard displayName="Spoiler Details">
-                        <column>
-                            <parameter name="ReadSpoiler"/>
-                        </column>
-                    </parameterCard>
-                </parameter>
-                <parameter name="SliceSpoiler.automatic" displayName="Auto Slice Spoiler">
-                    <parameterCard displayName="Spoiler Details">
-                        <column>
-                            <parameter name="SliceSpoiler"/>
-                        </column>
-                    </parameterCard>
-                </parameter>
-               <parameter name="PVM_FreqDriftYN"/>
             </column>
             <column>
                 <parameter name="Method"/>
                 <parameter name="PVM_AcquisitionTime"/>
-                <parameter name="EncGradDur"/>
             </column>
         </parameterCard>
         <xi:include href="file:///XML_INCLUDE_DIR/Freq1.xml"/>
@@ -156,13 +111,6 @@ Description: Layout of routine parameter editor for method FLASH.
             <parameter name="ExcPulse1Ampl.pampl" displayName="Exc. Pulse Amplitude"/>
         </column>
         </parameterCard>
-        <xi:include href="file:///XML_INCLUDE_DIR/FatSupSetup.xml"/>
-        <xi:include href="file:///XML_INCLUDE_DIR/FovSatSetup.xml"/>
-        <xi:include href="file:///XML_INCLUDE_DIR/SelIrSetup.xml"/>
-        <xi:include href="file:///XML_INCLUDE_DIR/MTC-Setup.xml"/>
-        <xi:include href="file:///XML_INCLUDE_DIR/FlowSatSetup.xml"/>
-        <xi:include href="file:///XML_INCLUDE_DIR/TaggingSetup.xml"/>
-        <xi:include href="file:///XML_INCLUDE_DIR/BlackBloodSetup.xml"/>
         <xi:include href="file:///XML_INCLUDE_DIR/mapshim.xml"/> 
         <xi:include href="file:///XML_INCLUDE_DIR/StartupShim.xml"/>
    </parameterCard>
@@ -179,10 +127,7 @@ Description: Layout of routine parameter editor for method FLASH.
     </parameterCard>
     <parameterCard displayName="Reconstruction" cardType="reco">
         <column>
-            <parameter name="RecoMethMode"/>
-            <parameter name="WeightingMode"/>
-            <parameter name="MaskWeighting"/>
-            <parameter name="GaussBroadening"/>
+            <textLine text=""/>
         </column>   
         <column>
             <textLine text=""/>

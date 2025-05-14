@@ -565,21 +565,6 @@ instlist::
 showppg ::
 	@echo $(notdir $(SRCDIR)/$(OVERLAY).ppg)
 
-installppg :: $(PPG_DIR)/$(notdir $(SRCDIR)/$(OVERLAY)Angio.ppg)
-$(PPG_DIR)/$(notdir $(SRCDIR)/$(OVERLAY)Angio.ppg) : $(SRCDIR)/$(OVERLAY)Angio.ppg
-	   if [ ! -d $(PPG_DIR) ]; then $(MKDIR) $(PPG_DIR) ; fi
-	   $(RM) $(PPG_DIR)/$(notdir $(SRCDIR)/$(OVERLAY)Angio.ppg)
-	   $(CP) $(SRCDIR)/$(OVERLAY)Angio.ppg $(PPG_DIR)/$(notdir $(SRCDIR)/$(OVERLAY)Angio.ppg)
-
-instclean::
-	$(RM) $(PPG_DIR)/$(notdir $(SRCDIR)/$(OVERLAY)Angio.ppg)
-
-instlist::
-	@echo $(PPG_DIR)/$(notdir $(SRCDIR)/$(OVERLAY)Angio.ppg)
-
-showppg ::
-	@echo $(notdir $(SRCDIR)/$(OVERLAY)Angio.ppg)
-
 cproto::
 	-if [ ! -r relProtos_p.h ]; then			  		\
 		$(TOUCH) relProtos_p.h;				\
@@ -759,6 +744,8 @@ initMeth.o: \
  /opt/PV6.0.1/prog/include/ovl_toolbox/RecoTools.h \
  /opt/PV6.0.1/prog/include/ovl_toolbox/VisuTools.h \
  /opt/PV6.0.1/prog/include/ovl_toolbox/Utils.h \
+ /opt/PV6.0.1/prog/include/PvUtil/PvUtil.h \
+ /opt/PV6.0.1/prog/include/machine.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/parsTypes.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos_p.h
@@ -826,6 +813,8 @@ loadMeth.o: \
  /opt/PV6.0.1/prog/include/ovl_toolbox/RecoTools.h \
  /opt/PV6.0.1/prog/include/ovl_toolbox/VisuTools.h \
  /opt/PV6.0.1/prog/include/ovl_toolbox/Utils.h \
+ /opt/PV6.0.1/prog/include/PvUtil/PvUtil.h \
+ /opt/PV6.0.1/prog/include/machine.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/parsTypes.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos_p.h
@@ -893,6 +882,8 @@ parsRelations.o: \
  /opt/PV6.0.1/prog/include/ovl_toolbox/RecoTools.h \
  /opt/PV6.0.1/prog/include/ovl_toolbox/VisuTools.h \
  /opt/PV6.0.1/prog/include/ovl_toolbox/Utils.h \
+ /opt/PV6.0.1/prog/include/PvUtil/PvUtil.h \
+ /opt/PV6.0.1/prog/include/machine.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/parsTypes.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos_p.h
@@ -960,6 +951,8 @@ BaseLevelRelations.o: \
  /opt/PV6.0.1/prog/include/ovl_toolbox/RecoTools.h \
  /opt/PV6.0.1/prog/include/ovl_toolbox/VisuTools.h \
  /opt/PV6.0.1/prog/include/ovl_toolbox/Utils.h \
+ /opt/PV6.0.1/prog/include/PvUtil/PvUtil.h \
+ /opt/PV6.0.1/prog/include/machine.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/parsTypes.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos_p.h
@@ -1027,6 +1020,8 @@ RecoRelations.o: \
  /opt/PV6.0.1/prog/include/ovl_toolbox/RecoTools.h \
  /opt/PV6.0.1/prog/include/ovl_toolbox/VisuTools.h \
  /opt/PV6.0.1/prog/include/ovl_toolbox/Utils.h \
+ /opt/PV6.0.1/prog/include/PvUtil/PvUtil.h \
+ /opt/PV6.0.1/prog/include/machine.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/parsTypes.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos_p.h
@@ -1094,6 +1089,8 @@ backbone.o: \
  /opt/PV6.0.1/prog/include/ovl_toolbox/RecoTools.h \
  /opt/PV6.0.1/prog/include/ovl_toolbox/VisuTools.h \
  /opt/PV6.0.1/prog/include/ovl_toolbox/Utils.h \
+ /opt/PV6.0.1/prog/include/PvUtil/PvUtil.h \
+ /opt/PV6.0.1/prog/include/machine.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/parsTypes.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos_p.h
@@ -1162,6 +1159,7 @@ deriveVisu.o: \
  /opt/PV6.0.1/prog/include/ovl_toolbox/RecoTools.h \
  /opt/PV6.0.1/prog/include/ovl_toolbox/VisuTools.h \
  /opt/PV6.0.1/prog/include/ovl_toolbox/Utils.h \
+ /opt/PV6.0.1/prog/include/PvUtil/PvUtil.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/parsTypes.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos_p.h \
@@ -1232,6 +1230,8 @@ pulseqRelations.o: \
  /opt/PV6.0.1/prog/include/ovl_toolbox/RecoTools.h \
  /opt/PV6.0.1/prog/include/ovl_toolbox/VisuTools.h \
  /opt/PV6.0.1/prog/include/ovl_toolbox/Utils.h \
+ /opt/PV6.0.1/prog/include/PvUtil/PvUtil.h \
+ /opt/PV6.0.1/prog/include/machine.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/parsTypes.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos.h \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/pulseqV1/relProtos_p.h \

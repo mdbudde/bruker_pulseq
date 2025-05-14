@@ -35,3 +35,29 @@ parclass
     TempSeq;
     MethodVersionTag;
 } PulseqParameters;
+
+double parameter
+{
+    display_name "Delays";
+    editable false;
+    units "ms";
+} DelayArray[];
+
+double parameter
+{
+    display_name "Gradient";
+    editable false;
+    units "ms";
+} GradientShapeArray[];
+
+void parameter 
+{
+    display_name "PPG testwrite";
+    relations CopyPPGScan;
+} TestPPGfileGen;
+
+
+char parameter 
+{
+    editable false;
+} ExpPpgFile[];

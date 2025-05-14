@@ -25,11 +25,7 @@
 parclass
 {
   PVM_EffSWh;
-  PVM_EchoPosition;
-  EncGradDur;
   PVM_AcquisitionTime;
-  ReadSpoiler;
-  SliceSpoiler;
   DigitizerPars;
 }
 attributes
@@ -50,43 +46,8 @@ attributes
 
 parclass
 {
-  DummyScans_Parameters;
-  PVM_FreqDriftYN;
-  
-  PVM_NMovieFrames;
-  TimeForMovieFrames;
-
-  PVM_EvolutionOnOff;
-  Evolution_Parameters;
-
   PVM_TriggerModule;
   Trigger_Parameters;
-
-  PVM_TaggingOnOff;
-  Tagging_Parameters;
-
-  PVM_SelIrOnOff;
-  Selective_IR_Parameters;
-
-  PVM_BlBloodOnOff;
-  BlackBlood_Parameters;
-
-  PVM_FatSupOnOff;
-  Fat_Sup_Parameters;
-
-  PVM_MagTransOnOff;
-  Magn_Transfer_Parameters;
-
-  PVM_FovSatOnOff;
-  Fov_Sat_Parameters;
-
-  PVM_InFlowSatOnOff;
-  Flow_Sat_Parameters;
-
-  PVM_MotionSupOnOff;
-
-  RFSpoiling;
-  AngioMode;
 
 } Preparation;
 
@@ -94,11 +55,6 @@ parclass
 parclass
 {
   Method;
-  PVM_EchoTime;
-  PVM_RepetitionTime;
-  PVM_NEchoImages;
-  PVM_NAverages;
-  PVM_NRepetitions;
   PVM_ScanTimeStr;
   PVM_ScanTime;
   PVM_DeriveGains;
@@ -110,7 +66,6 @@ parclass
   Preparation;
   MapShim;  
   StartupShims;
-
 } MethodClass;
 
 // parameters that should be tested after any editing
@@ -121,18 +76,6 @@ conflicts
   PVM_Fov;
   PVM_SliceThick;
 };
-
-// parameters for reconstruction 
-parclass
-{
-  RecoMethMode;
-  WeightingMode;
-  MaskWeighting;
-  GaussBroadening;
-}attributes
-{
-  display_name "Reconstruction Options";
-}MethodRecoGroup;
 
 /****************************************************************/
 /*	E N D   O F   F I L E					*/

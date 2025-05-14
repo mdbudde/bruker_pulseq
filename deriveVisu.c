@@ -99,20 +99,9 @@ deriveVisu(void)
     /* Standard VISU Derivation */
     ParxRelsParRelations("VisuDerivePars", Yes);
 
-    if (0 == VisuFileVersion)
-    {
-        if (PVM_NMovieFrames > 1)
-            /* Change id of Echo loop to movie loop */
-            PTB_VisuSetEchoLoopId(PV_IDL_CONSTANT(visuid_framegroup_MOVIE));
-
-    }
-
 
     if (3 > VisuFileVersion)
     {
-        if (RFSpoiling == Yes)
-            VisuAcqSpoiling = RFAndGradientSpoiled;
-
         VisuAcqEchoSequenceType = GradientEcho;
     }
 

@@ -30,6 +30,7 @@ static const char resid[] = "$Id: parsRelations.c,v 1.73.2.1 2013/12/10 16:21:57
 #define VersionTag "v0.1"
 
 #include "method.h"
+#include "time.h"
 #include "pulseqTypes.h"
 #include "pulseq_wrapper.h"
 
@@ -41,6 +42,13 @@ void UpdatePulseq(void) {
         ParxRelsParGetEnumValueAsInt("TempSeq", &seqInd);
         const char *seq_file = ParxRelsIntToEnumStr("TempSeq", seqInd);
         strcpy(PulseqFileStrArr,seq_file);
+        
+        
+     PARX_change_dims("ExpPpgFile",PATH_MAX);
+     PvOvlUtilGetExpnoPath(ExpPpgFile, PATH_MAX, "pulseq_exp.ppg");
+      
+    
+     WriteExpPpgFile();
 }
 
 
@@ -124,3 +132,78 @@ void PulseqFileHandler(void)
     
     DB_MSG(("--<PulseqFileHandler"));
 }
+
+
+
+/* set parameters just before acquisition */
+void SetBeforeAcquisition( void )
+{
+  DB_MSG(("-->SetBeforeAcquisition"));
+
+  int success = 0;
+  if (PVM_AcqScanHandler == Scan_Experiment) 
+  {
+      success = CopyPPGScan();
+  }
+  /* else
+  {
+    
+  } */
+
+  DB_MSG(("<--SetBeforeAcquisition"));
+}
+
+
+int WriteExpPpgFile()
+{
+  
+    FILE *fp = fopen(ExpPpgFile, "w");  // Open file for writing (overwrite if exists)
+    if (fp == NULL) {
+        perror("Failed to open file");
+        return 0;
+    }
+
+    fprintf(fp, ";method generated ppg file\n");
+    
+    
+    /* time_t now = time(NULL);                 // Get current time
+    char *time_str = ctime(&now);
+    fprintf(fp, ";timestamp: %s\n", time_str);
+    */
+    
+    fprintf(fp, "#include <MRI.include>\n");
+    fprintf(fp, "preset off\n\n");
+    fprintf(fp, "INIT_DEVICES\n\n");
+    fprintf(fp, "exit\n\n");
+   
+    fclose(fp);  // Close the file
+    
+    return 1; //success
+}
+    
+   //called from SetBeforeAcquisition and callback handler for testing
+int CopyPPGScan()
+{
+    
+    DB_MSG(("-->CopyPPGScan\n"));
+    
+    // user pulse program location
+    char scanPpgFile[100];
+    char *user= getenv("USER");
+    const char *pvdir = STR(PVDIR);
+    strcpy(scanPpgFile, pvdir);
+    strcat(scanPpgFile, "/prog/curdir/");
+    strcat(scanPpgFile, user);
+    strcat(scanPpgFile, "/ParaVision/exp/lists/pp/pulseq_scan.ppg");
+        
+    printf("scanPpgFile: %s\n", scanPpgFile);
+    PARX_sprintf("scanPpgFile: %s\n", scanPpgFile);
+    
+    PvUtilCopyFile(scanPpgFile, ExpPpgFile); // note this is (dest, source))
+    
+        
+    DB_MSG(("<--CopyPPGScan\n"));
+    return 1;
+}
+
+

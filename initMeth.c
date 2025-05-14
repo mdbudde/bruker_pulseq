@@ -45,21 +45,6 @@ void initMeth()
   /* which version of toolboxes should be active */
   
   PTB_VersionRequirement( Yes,20100101,"");
-    
-  /*  initialize local and redirected parameters */
-  
-  STB_InitFreqDriftCorr();
-
-  NAveragesRange();
-  InversionTimeRange();
-  if(ParxRelsParHasValue("PVM_NMovieFrames") == No)
-  {
-    PVM_NMovieFrames = 1;
-  }
-  if(ParxRelsParHasValue("PVM_NRepetitions") == No)
-  {
-    PVM_NRepetitions = 1;
-  }
   
   /* encoding group */
   STB_InitEncoding( 2, dimRange, lowMat, upMat, defaultMat);  
@@ -97,22 +82,8 @@ void initMeth()
   STB_InitImageGeometry();
   
   /* 1: method specific initialisation */
-  
-  if(ParxRelsParHasValue("PVM_RepetitionTime") == No)
-    PVM_RepetitionTime = 100.0;
-  if(ParxRelsParHasValue("PVM_EchoTime") == No)
-    PVM_EchoTime = 4.0;
   if(ParxRelsParHasValue("PVM_DeriveGains") == No)
     PVM_DeriveGains = Yes;
-  
-  
-  /* Initialisation of spoilers */
-  MRT_InitSpoiler("ReadSpoiler");
-  MRT_InitSpoiler("SliceSpoiler");
-
-  if (ParxRelsParHasValue("PVM_MotionSupOnOff") == 0)
-     PVM_MotionSupOnOff = Off;
-
 
   /* initialize digitizer parameter */
 
@@ -123,37 +94,12 @@ void initMeth()
   PTB_SetSpectrocopyDims( 0, 0 );
   
   /* Initialisation of modules */
-  STB_InitFatSupModule();
-  STB_InitMagTransModule();
-  STB_InitFovSatModule();
-  STB_InitFlowSaturationModule();
   STB_InitTriggerModule();
-  STB_InitTaggingModule();
-  STB_InitEvolutionModule();
-  STB_InitSelIrModule();
-  STB_InitBlBloodModule();
-  if(!ParxRelsParHasValue("RFSpoiling"))
-    RFSpoiling=No;
-  if(!ParxRelsParHasValue("AngioMode"))
-    AngioMode=No;
   STB_InitDummyScans(1000.0);
 
   /* initialize mapshim parameter class */
   STB_InitMapShim();
   STB_InitStartupShims();
-
-  /* initialization of method specific reconstruction */
-  if(ParxRelsParHasValue("RecoMethMode") == No)
-    RecoMethMode=Default;
-  if(ParxRelsParHasValue("WeightingMode") == No)
-    WeightingMode=positive_mask;
-  GaussBroadRange();
-  MaskWeightRange();
-
-  /* Visibility of parameters */
-  ParxRelsMakeNonEditable("PVM_EchoPosition");
-  ParxRelsMakeNonEditable("PVM_MinEchoTime,PVM_AcquisitionTime");
-  ParxRelsMakeNonEditable("EncGradDur");
 
   /* 
    * Once all parameters have initial values, the backbone is called
