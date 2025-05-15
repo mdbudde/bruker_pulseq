@@ -23,10 +23,4 @@ Makefile:
 - added ExxternalSequence.cpp, md5.cpp, and pulseq_wrapper.cpp to c++ compile and linker elements.
 - copies gre.seq to users .../exp/lists/seq/ directory (SEQ_DIR), creating if not existing.
 
-
-TODO and implementation considerations:
-- strip away all non-pulseq code (from FLASH).
-- convert gradient shapes to arrays for ppg. It is likely possible to re-use gradients (trapezoidal) with identical rise/top/fall times as a single gradient array and simply scale them in the ppg.  Since we are using shaped gradients, most will need gccontol blocks in the ppg to run gradients and rf/adc simultaneously. 
-- convert RF pulses to pulse files. This should be straightforward given prior efforts pulseq->ppg. Including Sint & Pint values (scalar of the pulse integral relative to a hard pulse of the same duration) will likely allow the method to use the transmit gain calibration during an update of the pulse.
-- write the ppg. Here again it may be possible to assign all pulseq durations with the same value to a single ppg variable (d1, etc) to re-use them in the ppg files. We may need to consider a clever scheme to write pulseq.ppg with a timestamp or similar to avoid overwriting a running sequence with one being prepared.  Or cycling around a two digit number, or something similar. 
-- 
+See discussions for additional needs and developments.
