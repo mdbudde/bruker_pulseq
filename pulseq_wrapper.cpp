@@ -5,6 +5,7 @@
 //#include <cstdint>
 #include <stdint.h>
 #include <string>
+#include <ctime>
 
 
 extern "C" {
@@ -64,7 +65,14 @@ int TranslateSeqToPpg(const char* path_seq, const char* path_ppg) {
     if (!fp) return 1;
 
     fprintf(fp, ";method generated ppg file\n");
-    
+
+    /* Write the current time to the ppg file */
+    char timebuffer[20];
+    std::time_t t = std::time(NULL);
+    std::tm tm;
+    localtime_r(&t, &tm);
+    std::strftime(timebuffer, sizeof(timebuffer), "%Y-%m-%d %H:%M:%S", &tm);
+    fprintf(fp, "; %s\n\n",timebuffer);
     
     fprintf(fp, "#include <MRI.include>\n");
     fprintf(fp, "preset off\n\n");
