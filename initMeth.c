@@ -78,6 +78,8 @@ void initMeth()
   /* Initialisation of nucleus */  
   STB_InitNuclei(1);
 
+  InitPulseq();
+
   /* Initialisation of geometry parameters */
   STB_InitImageGeometry();
   

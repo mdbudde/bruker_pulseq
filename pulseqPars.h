@@ -17,24 +17,21 @@ DYNSEQFILE parameter TempSeq;
 
 char parameter
 {
-    display_name "Pulsew File String";
+    display_name "Seq File String";
     relations backbone;
-} PulseqFileStrArr[100];
+} PulseqFileBase[100];
+
+char parameter
+{
+    display_name "Seq File Path";
+    editable false;
+} PulseqFileFullPath[];
 
 char parameter
 {
     display_name "Version Tag";
     editable false;
 } MethodVersionTag[100];
-
-parclass
-{   
-    SeqVersionTag;
-    PulseqFileDynEnum;
-    PulseqFileStrArr;
-    TempSeq;
-    MethodVersionTag;
-} PulseqParameters;
 
 double parameter
 {
@@ -53,11 +50,30 @@ double parameter
 void parameter 
 {
     display_name "PPG testwrite";
-    relations CopyPPGScan;
-} TestPPGfileGen;
+    relations PvTranslateSeqToPpg;
+} SeqToPpgFunction;
 
 
 char parameter 
 {
     editable false;
 } ExpPpgFile[];
+
+char parameter 
+{
+    editable false;
+} ScanPpgFile[];
+
+
+parclass
+{   
+    SeqVersionTag;
+    PulseqFileDynEnum;
+    PulseqFileBase;
+    PulseqFileFullPath;
+    TempSeq;
+    MethodVersionTag;
+    ExpPpgFile;
+    ScanPpgFile;
+    SeqToPpgFunction;
+} PulseqParameters;

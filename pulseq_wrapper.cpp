@@ -5,13 +5,116 @@
 #include <stdint.h>
 #include <string>
 
+
 extern "C" {
 
-int LoadSeqFile(const char* path_cstr) {
-    std::string path_cpp(path_cstr);
+
+int LoadSeqFile(const char* path_seq) {
+    std::string path_cpp(path_seq);
     ExternalSequence seq;
     seq.load(path_cpp);
     // Do whatever minimal work you need here, or call another helper class
+}
+
+int TranslateSeqToPpg(const char* path_seq, const char* path_ppg) {
+    std::string path_cpp(path_seq);
+    ExternalSequence seq;
+    seq.load(path_cpp);
+    // Do whatever minimal work you need here, or call another helper class
+
+
+    FILE* fp = fopen(path_ppg, "w");
+    if (!fp) return 1;
+
+    fprintf(fp, ";method generated ppg file\n");
+    
+    
+    fprintf(fp, "#include <MRI.include>\n");
+    fprintf(fp, "preset off\n\n");
+    fprintf(fp, "INIT_DEVICES\n\n");
+
+
+
+            // scan through the sequence, get blocks
+            int                      nRF             = 0;
+            int                      nGradArb        = 0;
+            int                      nGradTrap       = 0;
+            int                      nGradExtTrap    = 0;
+            int                      nLBL            = 0;
+            int                      nADC            = 0;
+            int                      nSoDe           = 0;
+            int64_t                  llTotalDuration = 0;
+            LabelStateAndBookkeeping labelStateAndBookkeeping;
+            int                      iB;
+            for (iB = 0; iB < seq.GetNumberOfBlocks(); ++iB)
+            {
+                SeqBlock* pBlock = seq.GetBlock(iB);
+                // look into the block, unpack content and collect some data or statistics
+
+                fprintf(fp, "   %.3fm \n",pBlock->GetDuration()/1000);
+
+                if (pBlock->isRF())
+                {
+                    ++nRF;
+                }
+
+                // Process each gradient channel
+                for (int iChannel = 0; iChannel < NUM_GRADS; iChannel++)
+                {
+                    if (pBlock->isArbitraryGradient(iChannel))
+                    {
+                        ++nGradArb;
+                    }
+                    else if (pBlock->isExtTrapGradient(iChannel))
+                    {
+                        ++nGradExtTrap;
+                    }
+                    else if (pBlock->isTrapGradient(iChannel))
+                    {
+                        ++nGradTrap;
+                    }
+                }
+
+                // scanning mdh boundaries / m_maxMdhids, part 1 (here we only update current counters)
+                if (pBlock->isLabel())
+                {
+                    ++nLBL;
+                    labelStateAndBookkeeping.updateLabelValues(pBlock);
+                }
+                // Count ADC events
+                if (pBlock->isADC())
+                {
+                    ++nADC;
+                    // if (m_nAdcLength == 0)
+                    //{
+                    //    m_nAdcLength       = pBlock->GetADCEvent().numSamples;
+                    //    m_nAdcDwellTime_ns = pBlock->GetADCEvent().dwellTime;
+                    //}
+                    // scanning mdh boundaries / m_maxMdhids, part 2 (here we actually update max)
+                    if (nLBL)
+                    {
+                        labelStateAndBookkeeping.updateBookkeepingRecordsADC();
+                    }
+                }
+
+                if (pBlock->isSoftDelay())
+                {
+                    ++nSoDe;
+                }
+
+                llTotalDuration += pBlock->GetDuration();
+
+                // free up the memory
+                delete pBlock;
+            }
+
+
+        fprintf(fp, "exit\n\n");
+        fclose(fp);
+
+
+
+
     return 1;
 }
 

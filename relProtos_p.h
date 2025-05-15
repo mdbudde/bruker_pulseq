@@ -28,9 +28,11 @@ void UpdateRFPulses(void);
 /* /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/deriveVisu.c */
 void deriveVisu(void);
 /* /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/pulseqRelations.c */
+void InitPulseq(void);
 void UpdatePulseq(void);
 void UpdateSeqList(void);
 void PulseqFileHandler(void);
+int PvTranslateSeqToPpg(void);
 void SetBeforeAcquisition(void);
 int WriteExpPpgFile(void);
 int CopyPPGScan(void);

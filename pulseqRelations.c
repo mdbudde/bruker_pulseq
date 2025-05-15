@@ -27,20 +27,53 @@ static const char resid[] = "$Id: parsRelations.c,v 1.73.2.1 2013/12/10 16:21:57
 #include "pulseq_wrapper.h"
 
 
+void InitPulseq(void) {
+
+        PARX_change_dims("ExpPpgFile",PATH_MAX);
+        PARX_change_dims("ScanPpgFile",PATH_MAX);
+        PARX_change_dims("PulseqFileFullPath",PATH_MAX);
+
+        // exp pulse program location
+        PvOvlUtilGetExpnoPath(ExpPpgFile, PATH_MAX, "pulseq_exp.ppg");
+            
+        // user pulse program location
+        PvPathMkHomePv(ScanPpgFile, NULL);
+        strcat(ScanPpgFile, "/exp/lists/pp/pulseq_scan.ppg");
+
+}
+
+
+
 void UpdatePulseq(void) {
-    UpdateSeqList();
+    
+        UpdateSeqList();
         int seqInd;
+        int success = 0;
         TempSeq = PulseqFileDynEnum;  
         ParxRelsParGetEnumValueAsInt("TempSeq", &seqInd);
         const char *seq_file = ParxRelsIntToEnumStr("TempSeq", seqInd);
-        strcpy(PulseqFileStrArr,seq_file);
+        strcpy(PulseqFileBase,seq_file);
         
+
+        PvPathMkHomePv(PulseqFileFullPath, NULL);
+        strcat(PulseqFileFullPath, "/exp/lists/seq/");      
+        strcat(PulseqFileFullPath, seq_file);      
         
-     PARX_change_dims("ExpPpgFile",PATH_MAX);
-     PvOvlUtilGetExpnoPath(ExpPpgFile, PATH_MAX, "pulseq_exp.ppg");
-      
-    
-     WriteExpPpgFile();
+        // if(ParxRelsParHasValue("PulseqFileFullPath") == Yes)
+        // {
+        //     success = LoadSeqFile(PulseqFileFullPath);
+        // }
+
+        // WriteExpPpgFile();
+     
+     
+/*
+    PVM_ppgGradShape32Size;
+    PVM_ppgGradShape32[];
+    PVM_ppgGradShapeArraySize[2];
+    PVM_ppgGradShapeArray[][];
+*/
+
 }
 
 
@@ -57,7 +90,7 @@ void UpdateSeqList(void)
 
 
 
-// Update when the Gradient Shape is changed.
+// Update when the Seq selector is changed, reverts if file doesn't load correctly.
 void PulseqFileHandler(void)
 {
     DB_MSG(("-->Seq Handler1"));
@@ -87,23 +120,17 @@ void PulseqFileHandler(void)
         
         const char *seq_file = ParxRelsIntToEnumStr("TempSeq", seqInd);
 
-
-        int MAXCHAR = 100;    
-        char seqpath[MAXCHAR];
         
+        char seqpath[PATH_MAX];/* directory path   */
         PvPathMkHomePv(seqpath, NULL);
         strcat(seqpath, "/exp/lists/seq/");      
-        strcat(seqpath, seq_file);        
-
-
-        printf("Update of seq %s  .\n",seqpath); 
-        PARX_sprintf("Update of seq %s .\n",seqpath); 
-
+        strcat(seqpath, seq_file);  
         int success = LoadSeqFile(seqpath);
         
         if ((success)) 
         {
-            strcpy(PulseqFileStrArr,seq_file);
+            strcpy(PulseqFileBase,seq_file);
+            strcpy(PulseqFileFullPath,seqpath);
             //UT_RequestParOrigValue(TempShape);
         }
             
@@ -112,6 +139,13 @@ void PulseqFileHandler(void)
         
     
     DB_MSG(("--<PulseqFileHandler"));
+}
+
+
+int PvTranslateSeqToPpg() {
+
+        int success = TranslateSeqToPpg(PulseqFileFullPath, ExpPpgFile);
+        return success;
 }
 
 
@@ -147,11 +181,6 @@ int WriteExpPpgFile()
     fprintf(fp, ";method generated ppg file\n");
     
     
-    /* time_t now = time(NULL);                 // Get current time
-    char *time_str = ctime(&now);
-    fprintf(fp, ";timestamp: %s\n", time_str);
-    */
-    
     fprintf(fp, "#include <MRI.include>\n");
     fprintf(fp, "preset off\n\n");
     fprintf(fp, "INIT_DEVICES\n\n");
@@ -167,18 +196,9 @@ int CopyPPGScan()
 {
     
     DB_MSG(("-->CopyPPGScan\n"));
+
+    PvUtilCopyFile(ScanPpgFile, ExpPpgFile); // note this is (dest, source))
     
-    // user pulse program location
-    char scanPpgFile[100];
-    PvPathMkHomePv(scanPpgFile, NULL);
-    strcat(scanPpgFile, "/exp/lists/pp/pulseq_scan.ppg");
-        
-    printf("scanPpgFile: %s\n", scanPpgFile);
-    PARX_sprintf("scanPpgFile: %s\n", scanPpgFile);
-    
-    PvUtilCopyFile(scanPpgFile, ExpPpgFile); // note this is (dest, source))
-    
-        
     DB_MSG(("<--CopyPPGScan\n"));
     return 1;
 }

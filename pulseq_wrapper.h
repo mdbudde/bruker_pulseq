@@ -6,7 +6,12 @@
 extern "C" {
 #endif
 
-int LoadSeqFile(const char* path);
+// typedef void* ExternalSequenceHandle;
+
+// int ExternalSequence_load(ExternalSequenceHandle handle, const char* path);
+
+int LoadSeqFile(const char* path_seq);
+int TranslateSeqToPpg(const char* path_seq, const char* path_ppg);
 
 #ifdef __cplusplus
 }

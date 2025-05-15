@@ -14,7 +14,10 @@ Description: Layout of routine parameter editor for method FLASH.
         <column>
             <parameter name="PulseqFileDynEnum"/> 
             <parameter name="PVM_ScanTimeStr"/>
-            <parameter name="TestPPGfileGen"/>
+            <parameter name="SeqToPpgFunction"/>
+            <parameter name="ScanPpgFile"/>
+            <parameter name="ExpPpgFile"/>
+            <parameter name="PulseqFileFullPath"/>  
             <textLine text=""/>
             <parameter name="ExcPulse1.Flipangle" displayName="Flip Angle"/>
         </column>
