@@ -70,15 +70,16 @@ void backbone(void)
   //UpdateGeometryMinima(minFov,
   //                     &minSliceThick);
 
- 
-  UpdatePulseq();
-  
   /* update geometry parameters                               */
   
   int dim=PTB_GetSpatDim();
+  if (dim > 2) {
+    minFov[2] = 10;
+  }
 
+  
   // only one package if black-blood module on
-  int maxPackages = PVM_BlBloodOnOff == On? 1:0;
+  int maxPackages = 1;
 
   // only one slice per package if 3D
   int maxPerPackage = dim>2? 1:0;
@@ -94,10 +95,14 @@ void backbone(void)
                           minSliceThick,
                           1.0); // sliceFovRatio in 3D
 
-  STB_UpdateTriggerModule();
- 
-  UpdateTotalTime();
+  UpdatePulseq();
 
+
+  ParxRelsShowInEditor("PVM_ScanTimeStr");
+  ParxRelsMakeNonEditable("PVM_ScanTimeStr");
+
+  
+  STB_UpdateTriggerModule();
   /* calculate frequency offsets                              */
   //UpdateFrequencyOffsets();
 
@@ -120,18 +125,18 @@ void backbone(void)
 
 /* calculates PVM_ScanTimeStr and TimeForMovieFrames */
 
-void UpdateTotalTime(void)
-{
-  int dim = PTB_GetSpatDim();
-  double TotalTime=0;
+// void UpdateTotalTime(void)
+// {
+//   int dim = PTB_GetSpatDim();
+//   double TotalTime=0;
 
-  TotalTime = 12345.;
+//   TotalTime = 12345.;
   
-  PVM_ScanTime = TotalTime;
-  UT_ScanTimeStr(PVM_ScanTimeStr,TotalTime);
-  ParxRelsShowInEditor("PVM_ScanTimeStr");
-  ParxRelsMakeNonEditable("PVM_ScanTimeStr");
-}
+//   PVM_ScanTime = TotalTime;
+//   UT_ScanTimeStr(PVM_ScanTimeStr,TotalTime);
+//   ParxRelsShowInEditor("PVM_ScanTimeStr");
+//   ParxRelsMakeNonEditable("PVM_ScanTimeStr");
+// }
 
 /* 
 void UpdateFrequencyOffsets( void )

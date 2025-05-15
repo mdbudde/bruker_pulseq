@@ -1239,7 +1239,8 @@ pulseqRelations.o: \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/pulseq_wrapper.h
 pulseq_wrapper.o: \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/pulseq_wrapper.cpp \
- /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/ExternalSequence.h
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/ExternalSequence.h \
+ /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/pulseq_wrapper.h
 ExternalSequence.o: \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/ExternalSequence.cpp \
  /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/ExternalSequence.h \

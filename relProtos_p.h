@@ -23,7 +23,6 @@ void SetRecoParam(void);
 void RecoDerive(void);
 /* /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/backbone.c */
 void backbone(void);
-void UpdateTotalTime(void);
 void UpdateRFPulses(void);
 /* /opt/PV6.0.1/prog/curdir/budde/ParaVision/methods/src/bruker_pulseq/deriveVisu.c */
 void deriveVisu(void);

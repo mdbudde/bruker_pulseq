@@ -1,6 +1,7 @@
 // parsemr_wrapper.cpp
 
 #include "ExternalSequence.h"
+#include "pulseq_wrapper.h"
 //#include <cstdint>
 #include <stdint.h>
 #include <string>
@@ -9,11 +10,47 @@
 extern "C" {
 
 
+
+ExternalSequenceHandle ExternalSequence_create() {
+    return new ExternalSequence();
+}
+
+int ExternalSequence_load(ExternalSequenceHandle handle, const char* path) {
+    return static_cast<ExternalSequence*>(handle)->load(std::string(path)) ? 1 : 0;
+}
+
+void ExternalSequence_destroy(ExternalSequenceHandle handle) {
+    delete static_cast<ExternalSequence*>(handle);
+}
+
+void Seq_getFOV(ExternalSequence* handle, double* fov0, double* fov1, double* fov2) {
+    if (!handle || !fov0 || !fov1 || !fov2) return;
+    std::vector<double> def = handle->GetDefinition("FOV");
+    if (def.size() == 3) {
+        *fov0 = def[0];
+        *fov1 = def[1];
+        *fov2 = def[2];
+    }
+}
+
+double Seq_getTotalTime(ExternalSequence* handle, double* totaltime) {
+    int64_t                  llTotalDuration = 0;
+    for (int iB = 0; iB < handle->GetNumberOfBlocks(); ++iB)
+    {
+        SeqBlock* pBlock = handle->GetBlock(iB);
+        llTotalDuration += pBlock->GetDuration();
+        delete pBlock;
+    }
+    *totaltime = (double)(llTotalDuration/1000);
+}
+
+
 int LoadSeqFile(const char* path_seq) {
     std::string path_cpp(path_seq);
     ExternalSequence seq;
     seq.load(path_cpp);
     // Do whatever minimal work you need here, or call another helper class
+    return 1;
 }
 
 int TranslateSeqToPpg(const char* path_seq, const char* path_ppg) {

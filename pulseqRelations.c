@@ -58,22 +58,7 @@ void UpdatePulseq(void) {
         PvPathMkHomePv(PulseqFileFullPath, NULL);
         strcat(PulseqFileFullPath, "/exp/lists/seq/");      
         strcat(PulseqFileFullPath, seq_file);      
-        
-        // if(ParxRelsParHasValue("PulseqFileFullPath") == Yes)
-        // {
-        //     success = LoadSeqFile(PulseqFileFullPath);
-        // }
-
-        // WriteExpPpgFile();
-     
-     
-/*
-    PVM_ppgGradShape32Size;
-    PVM_ppgGradShape32[];
-    PVM_ppgGradShapeArraySize[2];
-    PVM_ppgGradShapeArray[][];
-*/
-
+    
 }
 
 
@@ -144,8 +129,38 @@ void PulseqFileHandler(void)
 
 int PvTranslateSeqToPpg() {
 
-        int success = TranslateSeqToPpg(PulseqFileFullPath, ExpPpgFile);
-        return success;
+    int dim;
+    dim = PTB_GetSpatDim();
+
+    ExternalSequenceHandle seq = ExternalSequence_create();
+    if (ExternalSequence_load(seq, PulseqFileFullPath)) {
+        double d0, d1, d2;
+        Seq_getFOV((ExternalSequence*)seq, &d0, &d1, &d2);
+        PVM_Fov[0] = d0*100;
+        PVM_Fov[1] = d1*100;
+        if (dim > 2) {
+            PVM_Fov[2] = d2*1000 * PVM_Matrix[2];
+            PVM_SliceThick = PVM_Fov[2];
+        } else {
+            PVM_SliceThick = d2*1000;
+        }
+        Seq_getTotalTime((ExternalSequence*)seq, &PVM_ScanTime);
+        UT_ScanTimeStr(PVM_ScanTimeStr,PVM_ScanTime);
+        
+        /* this writes the ppg to the current exp directory */
+        TranslateSeqToPpg(PulseqFileFullPath, ExpPpgFile);
+
+/* PV has up to 32 grad shapes predefined, do these make it to ppg defines as well?
+    ...
+    PVM_ppgGradShape32Size;
+    PVM_ppgGradShape32[];
+    PVM_ppgGradShapeArraySize[2];
+    PVM_ppgGradShapeArray[][];
+*/
+
+    }
+    return 0;
+
 }
 
 
@@ -160,10 +175,6 @@ void SetBeforeAcquisition( void )
   {
       success = CopyPPGScan();
   }
-  /* else
-  {
-    
-  } */
 
   DB_MSG(("<--SetBeforeAcquisition"));
 }
