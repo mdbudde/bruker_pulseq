@@ -2,14 +2,6 @@
  *
  * $Source: /pv/CvsTree/pv/gen/src/prg/methods/FLASH/parsRelations.c,v $
  *
- * Copyright (c) 2002 - 2003
- * Bruker BioSpin MRI GmbH
- * D-76275 Ettlingen, Germany
- *
- * All Rights Reserved
- *
- *
- * $Id: parsRelations.c,v 1.73.2.1 2013/12/10 16:21:57 mawi Exp $
  *
  ****************************************************************/
 
