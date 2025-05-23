@@ -19,8 +19,4 @@ pulseqPars.h, pulseqTypes.h, pulseqRelations.c:
 - Setup a user dropbox to select a seq file to load from the .../exp/lists/seq directory.
 - NOTE: The dynamic file gui element doesn't recognize files with symbols in the name, hence gre.seq should be converted to greseq, etc.
 
-Makefile:
-- added ExxternalSequence.cpp, md5.cpp, and pulseq_wrapper.cpp to c++ compile and linker elements.
-- copies gre.seq to users .../exp/lists/seq/ directory (SEQ_DIR), creating if not existing.
-
 See discussions for additional needs and developments.
