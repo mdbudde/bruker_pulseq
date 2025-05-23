@@ -3,20 +3,23 @@ bruker method to run pulseq files on paravision
 
 
 Bruker Paravision (6.0.1) method file to run pulseq files.
-Copied from FLASH and added features. 
+This repo is simply code to load in the seq file using c.
+A different private repo (w Bruker code) will be used to integrate into the method once this one is (mostly) complete.
 
-Current status: 
-- Uses pulseq code to load seq files. 
-- NOTE: .cpp files do not appear in the Window Explorer; may need alternative editor.
+In a linix/mac, simply type:
+```
+make
+./loadseqtest
+```
+to run the code
 
-pulseq_wrapper.cpp, ExternalSequence.cpp: https://github.com/pulseq/pulseq/blob/master/src/ExternalSequence.cpp
-- convert C calls to/from C++ functions
-- The only change to ExternalSequence.cpp was to detect 'seq' instead of '.seq' filenames.
-- NOTE: a lot of warnings during compilation.
+The goal is to convert the functions here into c code:
+ExternalSequence.cpp: https://github.com/pulseq/pulseq/blob/master/src/ExternalSequence.cpp
+Why?
+The first implementation to wrap all c++ functions to make them c accessible was difficult and messy.
+With ai tools, rewriting the code in c should be easy enough to rebuild, and c is more familiar to the majority of paravision programmers (us).
 
-pulseqPars.h, pulseqTypes.h, pulseqRelations.c:
-- Main code to address pulseq elements and loading through PV interface.
-- Setup a user dropbox to select a seq file to load from the .../exp/lists/seq directory.
-- NOTE: The dynamic file gui element doesn't recognize files with symbols in the name, hence gre.seq should be converted to greseq, etc.
+In the LoadSequence.c file, the structures will be converted to paravision variables that are fully accessible in all parts of the code.
+I have done this for a load instructions from a similarly-formatted file (diffusion weighted directions and artbitary waveforms) and works quite well.
 
-See discussions for additional needs and developments.
+email me (mdbudde@mcw.edu) with any questions or access to the private repo. 
