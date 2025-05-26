@@ -7,88 +7,39 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#define MAX_LINE 1024
-#define MAX_BLOCKS 2048
-#define MAX_RF 256
-#define MAX_TRAP 256
-#define MAX_ADC 256
-#define MAX_SHAPES 512
-
-// SECTION STRUCTS; these will become paravision types in the sequence method
-typedef struct {
-    int major, minor, revision;
-} Version;
-
-typedef struct {
-    double FOV[3];
-    double GradientRasterTime;
-} Definitions;
-
-typedef struct {
-    int num[MAX_BLOCKS];
-    int dur[MAX_BLOCKS];
-    int rf[MAX_BLOCKS];
-    int gx[MAX_BLOCKS];
-    int gy[MAX_BLOCKS];
-    int gz[MAX_BLOCKS];
-    int adc[MAX_BLOCKS];
-    int ext[MAX_BLOCKS];
-} BLOCKTABLE;
-
-typedef struct {
-    int id[MAX_RF];
-    double delay[MAX_RF];
-    double freq[MAX_RF]; 
-    double phase[MAX_RF];
-    double amp[MAX_RF];
-    int shape_id[MAX_RF];
-} RFTABLE;
-
-typedef struct {
-    int id[MAX_TRAP];
-    double amp[MAX_TRAP]; 
-    double rise_time[MAX_TRAP];
-    double flat_time[MAX_TRAP];
-    double fall_time[MAX_TRAP];
-    double delay[MAX_TRAP];
-} TRAPTABLE;
-
-typedef struct {
-    int id[MAX_ADC];
-    int num_samples[MAX_ADC];
-    double dwell[MAX_ADC];
-    int delay[MAX_ADC];
-} ADCTABLE;
-
-typedef struct {
-    int id;
-    int num_samples;
-    double* samples;
-} SHAPE;
+#include <math.h>
+#include "LoadSequence.h"
 
 
 // GLOBAL STORAGE; these will move to paravision variables in the sequence method
 Version version;
 Definitions defs;
-BLOCKTABLE SeqBlockTable; int block_count = 0;
-RFTABLE SeqRFTable; int rf_count = 0;
-TRAPTABLE SeqTrapTable; int trap_count = 0;
-ADCTABLE SeqADCTable; int adc_count = 0;
-SHAPE SeqShapes[MAX_SHAPES]; int shape_count = 0;
+BLOCKTABLE SeqBlockTable; 
+RFTABLE SeqRFTable; 
+TRAPTABLE SeqTrapTable; 
+ADCTABLE SeqADCTable; 
+SHAPE SeqShapes[MAX_SHAPES]; 
 
-// UTIL
+
+int block_count = 0;
+int rf_count = 0;
+int trap_count = 0;
+int adc_count = 0;
+int shape_count = 0;
+
+// Function to trim newline characters from a string
 void trim_newline(char *line) {
     line[strcspn(line, "\r\n")] = 0;
 }
 
+// Function to free allocated memory for shapes
 void free_shapes() {
     for (int i = 0; i < shape_count; i++) {
         free(SeqShapes[i].samples);
     }
 }
 
-
+// Function to load a sequence file
 int LoadSequenceFile(const char* filename) {
     FILE *fp = fopen(filename, "r");
     if (!fp) {
@@ -98,6 +49,7 @@ int LoadSequenceFile(const char* filename) {
 
     char line[MAX_LINE], section[MAX_LINE] = "";
     int shape_sample_mode = 0; // if > 0, we're in SHAPES data
+    int num_loaded = 0; // Count of loaded samples
     SHAPE *curr_shape = NULL;
     while (fgets(line, sizeof(line), fp)) {
         trim_newline(line);
@@ -191,6 +143,7 @@ int LoadSequenceFile(const char* filename) {
             if (shape_sample_mode == 0) {
             // Start of a new shape
             int id, num_samples;
+            num_loaded = 0;
             if (sscanf(line, "shape_id %d", &id) == 1) {
                 shape_count++;
                 if (shape_count < MAX_SHAPES) {
@@ -209,6 +162,8 @@ int LoadSequenceFile(const char* filename) {
                 int sample_index = curr_shape->num_samples - shape_sample_mode;
                 if (sample_index >= 0 && sample_index < curr_shape->num_samples) {
                     curr_shape->samples[sample_index] = atof(line);
+                    num_loaded++;
+                    curr_shape->samples_loaded = num_loaded;
                 }
                 shape_sample_mode--;
                 if (shape_sample_mode == 0) {
@@ -219,6 +174,7 @@ int LoadSequenceFile(const char* filename) {
     }
 
     fclose(fp);
+    printf("Sequence file '%s' loaded successfully.\n", filename);
 
     // Print Summary
     printf("VERSION: %d.%d.%d\n", version.major, version.minor, version.revision);
@@ -227,7 +183,67 @@ int LoadSequenceFile(const char* filename) {
     printf("BLOCKS: %d | RF: %d | TRAP: %d | ADC: %d | SHAPES: %d\n",
            block_count, rf_count, trap_count, adc_count, shape_count);
 
+
+    for (int i = 0; i < shape_count; i++) {
+        if (SeqShapes[i].num_samples > SeqShapes[i].samples_loaded) {
+            printf("Shape ID %d: runtime compressed\n", SeqShapes[i].id);
+            double shape[SeqShapes[i].num_samples]; // Allocate shape array
+            if (decompressShape(SeqShapes[i], shape)) {
+                SeqShapes[i].samples = shape;
+            }
+        } else {
+            printf("Shape ID %d: not runtime compressed\n", SeqShapes[i].id);
+        }
+    }
+
     // Free shapes
     //free_shapes();
     return 0;
+}
+
+
+/***********************************************************/
+// Decompress shape: returns 1 on success, 0 on failure
+// COPILOT GENERATED CODE
+int decompressShape(SHAPE encoded, double *shape)
+{
+    if (encoded.num_samples == encoded.samples_loaded) {
+        // Not compressed, just copy
+        for (int i = 0; i < encoded.num_samples; i++) {
+            shape[i] = (float)encoded.samples[i];
+        }
+        return 1;
+    }
+    // Compressed shape: decompress using run-length encoding
+    double *packed = encoded.samples;
+    int numPacked = encoded.samples_loaded;
+    int numSamples = encoded.num_samples;
+
+    int countPack = 1;
+    int countUnpack = 1;
+    while (countPack < numPacked) {
+        if (packed[countPack - 1] != packed[countPack]) {
+            shape[countUnpack - 1] = (float)packed[countPack - 1];
+            countPack++; countUnpack++;
+        } else {
+            int rep = ((int)packed[countPack + 1]) + 2;
+            if (fabs(packed[countPack + 1] + 2 - rep) > 1e-6) {
+                printf("ERROR: compressed shape format error detected\n");
+                return 0;
+            }
+            for (int i = countUnpack - 1; i <= countUnpack + rep - 2; i++)
+                shape[i] = (float)packed[countPack - 1];
+            countPack += 3;
+            countUnpack += rep;
+        }
+    }
+    if (countPack == numPacked) {
+        shape[countUnpack - 1] = (float)packed[countPack - 1];
+    }
+    // Cumulative sum
+    for (int i = 1; i < numSamples; i++) {
+        shape[i] = shape[i] + shape[i - 1];
+    }
+    printf("Shape ID %d: Decompressed to %d samples\n", encoded.id, numSamples);
+    return 1;
 }
