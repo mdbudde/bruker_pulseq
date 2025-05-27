@@ -1,0 +1,991 @@
+; PPG file
+;
+; Created from a Pulseq file
+;
+
+
+
+;-------include files-------
+#include <MRI.include>
+
+;------shape reference------
+;  rise  flat  fall 
+  ; PVM_ppgGradShape0 is 60u 4000u 60u
+  ; PVM_ppgGradShape1 is 20u 1960u 20u
+  ; PVM_ppgGradShape2 is 20u 1960u 20u
+  ; PVM_ppgGradShape3 is 60u 1880u 60u
+  ; PVM_ppgGradShape4 is 10u 6400u 10u
+  ; PVM_ppgGradShape5 is 190u 240u 190u
+  ; PVM_ppgGradShape6 is 20u 1960u 20u
+
+;-------definitions-------
+preset off
+
+INIT_DEVICES
+
+;-------sequence-------
+start,
+    10u gc_control                                                                                                      ; block 1 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape1 * -0.307, PVM_ppgGradShape2 * -1.658}                 ; block 2
+    12u                                                                                                                 ; block 3
+    10u gc_control                                                                                                      ; block 4 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape1 * 0.307, PVM_ppgGradShape5 * 5.660}                   ; block 5
+    10u gc_control                                                                                                      ; block 6 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.296, PVM_ppgGradShape2 * -1.658}                 ; block 7
+    12u                                                                                                                 ; block 8
+    10u gc_control                                                                                                      ; block 9 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.296, PVM_ppgGradShape5 * 5.660}                   ; block 10
+    10u gc_control                                                                                                      ; block 11 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.287, PVM_ppgGradShape2 * -1.658}                 ; block 12
+    12u                                                                                                                 ; block 13
+    10u gc_control                                                                                                      ; block 14 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.287, PVM_ppgGradShape5 * 5.660}                   ; block 15
+    10u gc_control                                                                                                      ; block 16 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.277, PVM_ppgGradShape2 * -1.658}                 ; block 17
+    12u                                                                                                                 ; block 18
+    10u gc_control                                                                                                      ; block 19 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.277, PVM_ppgGradShape5 * 5.660}                   ; block 20
+    10u gc_control                                                                                                      ; block 21 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.268, PVM_ppgGradShape2 * -1.658}                 ; block 22
+    12u                                                                                                                 ; block 23
+    10u gc_control                                                                                                      ; block 24 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.268, PVM_ppgGradShape5 * 5.660}                   ; block 25
+    10u gc_control                                                                                                      ; block 26 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.258, PVM_ppgGradShape2 * -1.658}                 ; block 27
+    12u                                                                                                                 ; block 28
+    10u gc_control                                                                                                      ; block 29 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.258, PVM_ppgGradShape5 * 5.660}                   ; block 30
+    10u gc_control                                                                                                      ; block 31 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.248, PVM_ppgGradShape2 * -1.658}                 ; block 32
+    12u                                                                                                                 ; block 33
+    10u gc_control                                                                                                      ; block 34 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.248, PVM_ppgGradShape5 * 5.660}                   ; block 35
+    10u gc_control                                                                                                      ; block 36 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.239, PVM_ppgGradShape2 * -1.658}                 ; block 37
+    12u                                                                                                                 ; block 38
+    10u gc_control                                                                                                      ; block 39 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.239, PVM_ppgGradShape5 * 5.660}                   ; block 40
+    10u gc_control                                                                                                      ; block 41 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.229, PVM_ppgGradShape2 * -1.658}                 ; block 42
+    12u                                                                                                                 ; block 43
+    10u gc_control                                                                                                      ; block 44 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.229, PVM_ppgGradShape5 * 5.660}                   ; block 45
+    10u gc_control                                                                                                      ; block 46 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.220, PVM_ppgGradShape2 * -1.658}                 ; block 47
+    12u                                                                                                                 ; block 48
+    10u gc_control                                                                                                      ; block 49 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.220, PVM_ppgGradShape5 * 5.660}                   ; block 50
+    10u gc_control                                                                                                      ; block 51 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.210, PVM_ppgGradShape2 * -1.658}                 ; block 52
+    12u                                                                                                                 ; block 53
+    10u gc_control                                                                                                      ; block 54 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.210, PVM_ppgGradShape5 * 5.660}                   ; block 55
+    10u gc_control                                                                                                      ; block 56 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.201, PVM_ppgGradShape2 * -1.658}                 ; block 57
+    12u                                                                                                                 ; block 58
+    10u gc_control                                                                                                      ; block 59 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.201, PVM_ppgGradShape5 * 5.660}                   ; block 60
+    10u gc_control                                                                                                      ; block 61 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.191, PVM_ppgGradShape2 * -1.658}                 ; block 62
+    12u                                                                                                                 ; block 63
+    10u gc_control                                                                                                      ; block 64 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.191, PVM_ppgGradShape5 * 5.660}                   ; block 65
+    10u gc_control                                                                                                      ; block 66 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.182, PVM_ppgGradShape2 * -1.658}                 ; block 67
+    12u                                                                                                                 ; block 68
+    10u gc_control                                                                                                      ; block 69 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.182, PVM_ppgGradShape5 * 5.660}                   ; block 70
+    10u gc_control                                                                                                      ; block 71 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.172, PVM_ppgGradShape2 * -1.658}                 ; block 72
+    12u                                                                                                                 ; block 73
+    10u gc_control                                                                                                      ; block 74 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.172, PVM_ppgGradShape5 * 5.660}                   ; block 75
+    10u gc_control                                                                                                      ; block 76 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.162, PVM_ppgGradShape2 * -1.658}                 ; block 77
+    12u                                                                                                                 ; block 78
+    10u gc_control                                                                                                      ; block 79 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.162, PVM_ppgGradShape5 * 5.660}                   ; block 80
+    10u gc_control                                                                                                      ; block 81 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.153, PVM_ppgGradShape2 * -1.658}                 ; block 82
+    12u                                                                                                                 ; block 83
+    10u gc_control                                                                                                      ; block 84 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.153, PVM_ppgGradShape5 * 5.660}                   ; block 85
+    10u gc_control                                                                                                      ; block 86 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.143, PVM_ppgGradShape2 * -1.658}                 ; block 87
+    12u                                                                                                                 ; block 88
+    10u gc_control                                                                                                      ; block 89 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.143, PVM_ppgGradShape5 * 5.660}                   ; block 90
+    10u gc_control                                                                                                      ; block 91 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.134, PVM_ppgGradShape2 * -1.658}                 ; block 92
+    12u                                                                                                                 ; block 93
+    10u gc_control                                                                                                      ; block 94 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.134, PVM_ppgGradShape5 * 5.660}                   ; block 95
+    10u gc_control                                                                                                      ; block 96 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.124, PVM_ppgGradShape2 * -1.658}                 ; block 97
+    12u                                                                                                                 ; block 98
+    10u gc_control                                                                                                      ; block 99 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.124, PVM_ppgGradShape5 * 5.660}                   ; block 100
+    10u gc_control                                                                                                      ; block 101 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.115, PVM_ppgGradShape2 * -1.658}                 ; block 102
+    12u                                                                                                                 ; block 103
+    10u gc_control                                                                                                      ; block 104 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.115, PVM_ppgGradShape5 * 5.660}                   ; block 105
+    10u gc_control                                                                                                      ; block 106 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.105, PVM_ppgGradShape2 * -1.658}                 ; block 107
+    12u                                                                                                                 ; block 108
+    10u gc_control                                                                                                      ; block 109 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.105, PVM_ppgGradShape5 * 5.660}                   ; block 110
+    10u gc_control                                                                                                      ; block 111 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.096, PVM_ppgGradShape2 * -1.658}                 ; block 112
+    12u                                                                                                                 ; block 113
+    10u gc_control                                                                                                      ; block 114 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.096, PVM_ppgGradShape5 * 5.660}                   ; block 115
+    10u gc_control                                                                                                      ; block 116 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.086, PVM_ppgGradShape2 * -1.658}                 ; block 117
+    12u                                                                                                                 ; block 118
+    10u gc_control                                                                                                      ; block 119 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.086, PVM_ppgGradShape5 * 5.660}                   ; block 120
+    10u gc_control                                                                                                      ; block 121 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.076, PVM_ppgGradShape2 * -1.658}                 ; block 122
+    12u                                                                                                                 ; block 123
+    10u gc_control                                                                                                      ; block 124 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.076, PVM_ppgGradShape5 * 5.660}                   ; block 125
+    10u gc_control                                                                                                      ; block 126 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.067, PVM_ppgGradShape2 * -1.658}                 ; block 127
+    12u                                                                                                                 ; block 128
+    10u gc_control                                                                                                      ; block 129 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.067, PVM_ppgGradShape5 * 5.660}                   ; block 130
+    10u gc_control                                                                                                      ; block 131 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.057, PVM_ppgGradShape2 * -1.658}                 ; block 132
+    12u                                                                                                                 ; block 133
+    10u gc_control                                                                                                      ; block 134 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.057, PVM_ppgGradShape5 * 5.660}                   ; block 135
+    10u gc_control                                                                                                      ; block 136 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.048, PVM_ppgGradShape2 * -1.658}                 ; block 137
+    12u                                                                                                                 ; block 138
+    10u gc_control                                                                                                      ; block 139 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.048, PVM_ppgGradShape5 * 5.660}                   ; block 140
+    10u gc_control                                                                                                      ; block 141 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.038, PVM_ppgGradShape2 * -1.658}                 ; block 142
+    12u                                                                                                                 ; block 143
+    10u gc_control                                                                                                      ; block 144 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.038, PVM_ppgGradShape5 * 5.660}                   ; block 145
+    10u gc_control                                                                                                      ; block 146 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.029, PVM_ppgGradShape2 * -1.658}                 ; block 147
+    12u                                                                                                                 ; block 148
+    10u gc_control                                                                                                      ; block 149 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.029, PVM_ppgGradShape5 * 5.660}                   ; block 150
+    10u gc_control                                                                                                      ; block 151 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.019, PVM_ppgGradShape2 * -1.658}                 ; block 152
+    12u                                                                                                                 ; block 153
+    10u gc_control                                                                                                      ; block 154 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.019, PVM_ppgGradShape5 * 5.660}                   ; block 155
+    10u gc_control                                                                                                      ; block 156 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.010, PVM_ppgGradShape2 * -1.658}                 ; block 157
+    12u                                                                                                                 ; block 158
+    10u gc_control                                                                                                      ; block 159 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * 0.010, PVM_ppgGradShape5 * 5.660}                   ; block 160
+    10u gc_control                                                                                                      ; block 161 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.000, PVM_ppgGradShape2 * -1.658}                  ; block 162
+    12u                                                                                                                 ; block 163
+    10u gc_control                                                                                                      ; block 164 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.000, PVM_ppgGradShape5 * 5.660}                  ; block 165
+    10u gc_control                                                                                                      ; block 166 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.010, PVM_ppgGradShape2 * -1.658}                  ; block 167
+    12u                                                                                                                 ; block 168
+    10u gc_control                                                                                                      ; block 169 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.010, PVM_ppgGradShape5 * 5.660}                  ; block 170
+    10u gc_control                                                                                                      ; block 171 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.019, PVM_ppgGradShape2 * -1.658}                  ; block 172
+    12u                                                                                                                 ; block 173
+    10u gc_control                                                                                                      ; block 174 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.019, PVM_ppgGradShape5 * 5.660}                  ; block 175
+    10u gc_control                                                                                                      ; block 176 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.029, PVM_ppgGradShape2 * -1.658}                  ; block 177
+    12u                                                                                                                 ; block 178
+    10u gc_control                                                                                                      ; block 179 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.029, PVM_ppgGradShape5 * 5.660}                  ; block 180
+    10u gc_control                                                                                                      ; block 181 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.038, PVM_ppgGradShape2 * -1.658}                  ; block 182
+    12u                                                                                                                 ; block 183
+    10u gc_control                                                                                                      ; block 184 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.038, PVM_ppgGradShape5 * 5.660}                  ; block 185
+    10u gc_control                                                                                                      ; block 186 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.048, PVM_ppgGradShape2 * -1.658}                  ; block 187
+    12u                                                                                                                 ; block 188
+    10u gc_control                                                                                                      ; block 189 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.048, PVM_ppgGradShape5 * 5.660}                  ; block 190
+    10u gc_control                                                                                                      ; block 191 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.057, PVM_ppgGradShape2 * -1.658}                  ; block 192
+    12u                                                                                                                 ; block 193
+    10u gc_control                                                                                                      ; block 194 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.057, PVM_ppgGradShape5 * 5.660}                  ; block 195
+    10u gc_control                                                                                                      ; block 196 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.067, PVM_ppgGradShape2 * -1.658}                  ; block 197
+    12u                                                                                                                 ; block 198
+    10u gc_control                                                                                                      ; block 199 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.067, PVM_ppgGradShape5 * 5.660}                  ; block 200
+    10u gc_control                                                                                                      ; block 201 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.076, PVM_ppgGradShape2 * -1.658}                  ; block 202
+    12u                                                                                                                 ; block 203
+    10u gc_control                                                                                                      ; block 204 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.076, PVM_ppgGradShape5 * 5.660}                  ; block 205
+    10u gc_control                                                                                                      ; block 206 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.086, PVM_ppgGradShape2 * -1.658}                  ; block 207
+    12u                                                                                                                 ; block 208
+    10u gc_control                                                                                                      ; block 209 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.086, PVM_ppgGradShape5 * 5.660}                  ; block 210
+    10u gc_control                                                                                                      ; block 211 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.096, PVM_ppgGradShape2 * -1.658}                  ; block 212
+    12u                                                                                                                 ; block 213
+    10u gc_control                                                                                                      ; block 214 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.096, PVM_ppgGradShape5 * 5.660}                  ; block 215
+    10u gc_control                                                                                                      ; block 216 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.105, PVM_ppgGradShape2 * -1.658}                  ; block 217
+    12u                                                                                                                 ; block 218
+    10u gc_control                                                                                                      ; block 219 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.105, PVM_ppgGradShape5 * 5.660}                  ; block 220
+    10u gc_control                                                                                                      ; block 221 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.115, PVM_ppgGradShape2 * -1.658}                  ; block 222
+    12u                                                                                                                 ; block 223
+    10u gc_control                                                                                                      ; block 224 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.115, PVM_ppgGradShape5 * 5.660}                  ; block 225
+    10u gc_control                                                                                                      ; block 226 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.124, PVM_ppgGradShape2 * -1.658}                  ; block 227
+    12u                                                                                                                 ; block 228
+    10u gc_control                                                                                                      ; block 229 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.124, PVM_ppgGradShape5 * 5.660}                  ; block 230
+    10u gc_control                                                                                                      ; block 231 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.134, PVM_ppgGradShape2 * -1.658}                  ; block 232
+    12u                                                                                                                 ; block 233
+    10u gc_control                                                                                                      ; block 234 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.134, PVM_ppgGradShape5 * 5.660}                  ; block 235
+    10u gc_control                                                                                                      ; block 236 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.143, PVM_ppgGradShape2 * -1.658}                  ; block 237
+    12u                                                                                                                 ; block 238
+    10u gc_control                                                                                                      ; block 239 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.143, PVM_ppgGradShape5 * 5.660}                  ; block 240
+    10u gc_control                                                                                                      ; block 241 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.153, PVM_ppgGradShape2 * -1.658}                  ; block 242
+    12u                                                                                                                 ; block 243
+    10u gc_control                                                                                                      ; block 244 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.153, PVM_ppgGradShape5 * 5.660}                  ; block 245
+    10u gc_control                                                                                                      ; block 246 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.162, PVM_ppgGradShape2 * -1.658}                  ; block 247
+    12u                                                                                                                 ; block 248
+    10u gc_control                                                                                                      ; block 249 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.162, PVM_ppgGradShape5 * 5.660}                  ; block 250
+    10u gc_control                                                                                                      ; block 251 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.172, PVM_ppgGradShape2 * -1.658}                  ; block 252
+    12u                                                                                                                 ; block 253
+    10u gc_control                                                                                                      ; block 254 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.172, PVM_ppgGradShape5 * 5.660}                  ; block 255
+    10u gc_control                                                                                                      ; block 256 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.182, PVM_ppgGradShape2 * -1.658}                  ; block 257
+    12u                                                                                                                 ; block 258
+    10u gc_control                                                                                                      ; block 259 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.182, PVM_ppgGradShape5 * 5.660}                  ; block 260
+    10u gc_control                                                                                                      ; block 261 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.191, PVM_ppgGradShape2 * -1.658}                  ; block 262
+    12u                                                                                                                 ; block 263
+    10u gc_control                                                                                                      ; block 264 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.191, PVM_ppgGradShape5 * 5.660}                  ; block 265
+    10u gc_control                                                                                                      ; block 266 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.201, PVM_ppgGradShape2 * -1.658}                  ; block 267
+    12u                                                                                                                 ; block 268
+    10u gc_control                                                                                                      ; block 269 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.201, PVM_ppgGradShape5 * 5.660}                  ; block 270
+    10u gc_control                                                                                                      ; block 271 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.210, PVM_ppgGradShape2 * -1.658}                  ; block 272
+    12u                                                                                                                 ; block 273
+    10u gc_control                                                                                                      ; block 274 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.210, PVM_ppgGradShape5 * 5.660}                  ; block 275
+    10u gc_control                                                                                                      ; block 276 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.220, PVM_ppgGradShape2 * -1.658}                  ; block 277
+    12u                                                                                                                 ; block 278
+    10u gc_control                                                                                                      ; block 279 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.220, PVM_ppgGradShape5 * 5.660}                  ; block 280
+    10u gc_control                                                                                                      ; block 281 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.229, PVM_ppgGradShape2 * -1.658}                  ; block 282
+    12u                                                                                                                 ; block 283
+    10u gc_control                                                                                                      ; block 284 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.229, PVM_ppgGradShape5 * 5.660}                  ; block 285
+    10u gc_control                                                                                                      ; block 286 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.239, PVM_ppgGradShape2 * -1.658}                  ; block 287
+    12u                                                                                                                 ; block 288
+    10u gc_control                                                                                                      ; block 289 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.239, PVM_ppgGradShape5 * 5.660}                  ; block 290
+    10u gc_control                                                                                                      ; block 291 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.248, PVM_ppgGradShape2 * -1.658}                  ; block 292
+    12u                                                                                                                 ; block 293
+    10u gc_control                                                                                                      ; block 294 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.248, PVM_ppgGradShape5 * 5.660}                  ; block 295
+    10u gc_control                                                                                                      ; block 296 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.258, PVM_ppgGradShape2 * -1.658}                  ; block 297
+    12u                                                                                                                 ; block 298
+    10u gc_control                                                                                                      ; block 299 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.258, PVM_ppgGradShape5 * 5.660}                  ; block 300
+    10u gc_control                                                                                                      ; block 301 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.268, PVM_ppgGradShape2 * -1.658}                  ; block 302
+    12u                                                                                                                 ; block 303
+    10u gc_control                                                                                                      ; block 304 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.268, PVM_ppgGradShape5 * 5.660}                  ; block 305
+    10u gc_control                                                                                                      ; block 306 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.277, PVM_ppgGradShape2 * -1.658}                  ; block 307
+    12u                                                                                                                 ; block 308
+    10u gc_control                                                                                                      ; block 309 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.277, PVM_ppgGradShape5 * 5.660}                  ; block 310
+    10u gc_control                                                                                                      ; block 311 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.287, PVM_ppgGradShape2 * -1.658}                  ; block 312
+    12u                                                                                                                 ; block 313
+    10u gc_control                                                                                                      ; block 314 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.287, PVM_ppgGradShape5 * 5.660}                  ; block 315
+    10u gc_control                                                                                                      ; block 316 w RF
+    {
+        416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
+    }; end gc_control
+    416u ; RF PULSE GOES HERE
+
+    200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.296, PVM_ppgGradShape2 * -1.658}                  ; block 317
+    12u                                                                                                                 ; block 318
+    10u gc_control                                                                                                      ; block 319 w ADC
+    {
+        642u grad_shape{PVM_ppgGradShape3 * 0.190, 0, 0}
+    }; end gc_control
+    642u ; ADC GOES HERE
+
+    8731u grad_shape{PVM_ppgGradShape4 * 5.661, PVM_ppgGradShape6 * -0.296, PVM_ppgGradShape5 * 5.660}                  ; block 320
+
+
+bye,    1u
+exit,

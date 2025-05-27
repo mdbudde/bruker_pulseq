@@ -21,6 +21,8 @@ ADCTABLE SeqADCTable;
 SHAPE SeqShapes[MAX_SHAPES]; 
 GRADSHAPE SeqGradients[MAX_SHAPES]; 
 
+double gyromagnetic_ratio = 42.576e3; // MHz/T for 1H, will get from PV for this nucleus
+double GradMax = 494.0; // Maximum gradient amplitude in mT/m, will get from PV
 
 int Seq_NBlocks = 0;
 int Seq_NRF = 0;
@@ -51,8 +53,12 @@ void UpdateSeq(void) {
     }
 
     // Convert trapezoids to gradient shapes
-    double gradrastertime = 8e-6; // in seconds
+    double gradrastertime = 8e-3; // in seconds; for testing make small. 
     GradTrapToGradShape(gradrastertime);
+
+    //GradShapeToPPGShape();
+
+    WritePPG("pulseq.ppg");
 }
 
 // Function to load a sequence file
@@ -118,9 +124,9 @@ int LoadSequenceFile(const char* filename) {
             }
         } else if (strcmp(section, "[TRAP]") == 0) {
             if (Seq_NTrap < MAX_TRAP) {
-                int id;
-                double amp, rise_time, flat_time, fall_time, delay;
-                if (sscanf(line, "%d %lf %lf %lf %lf %lf", 
+                int id, rise_time, flat_time, fall_time, delay;
+                double amp;
+                if (sscanf(line, "%d %lf %d %d %d %d", 
                     &id, &amp, &rise_time, &flat_time, &fall_time, &delay) == 6) {
                     SeqTrapTable.id[Seq_NTrap] = id;
                     SeqTrapTable.amp[Seq_NTrap] = amp;
@@ -128,6 +134,7 @@ int LoadSequenceFile(const char* filename) {
                     SeqTrapTable.flat_time[Seq_NTrap] = flat_time;
                     SeqTrapTable.fall_time[Seq_NTrap] = fall_time;
                     SeqTrapTable.delay[Seq_NTrap] = delay;
+                    SeqTrapTable.amp_percent[Seq_NTrap] = (amp / gyromagnetic_ratio / GradMax) * 100.0; // convert Hz/m to mT/m and percent of gradient max
                     Seq_NTrap++;
                 }
             }
@@ -331,12 +338,12 @@ void GradTrapToGradShape(double gradrastertime) {
 
         // Check if this combination already exists
         for (int j = 0; j < i; j++) {
-            if (fabs(SeqTrapTable.rise_time[i] - SeqTrapTable.rise_time[j]) < 1e-9 &&
-                fabs(SeqTrapTable.flat_time[i] - SeqTrapTable.flat_time[j]) < 1e-9 &&
-                fabs(SeqTrapTable.fall_time[i] - SeqTrapTable.fall_time[j]) < 1e-9) {
+            if ((SeqTrapTable.rise_time[i] == SeqTrapTable.rise_time[j]) &&
+                (SeqTrapTable.flat_time[i] == SeqTrapTable.flat_time[j]) &&
+                (SeqTrapTable.fall_time[i] == SeqTrapTable.fall_time[j]))  {
                 found = 1;
-                shape_id = SeqTrapTable.id[j];
-                printf("Trapezoid %d matches %d\n", SeqTrapTable.id[i], SeqTrapTable.id[j]);
+                shape_id = SeqTrapTable.grad_shape_id[j]; // Use existing shape ID
+                printf("Trapezoid %d matches %d, with shapeindex %d\n", SeqTrapTable.id[i], SeqTrapTable.id[j], shape_id);
                 break;
             }
         }
@@ -344,8 +351,8 @@ void GradTrapToGradShape(double gradrastertime) {
         if (!found) {
             // Add new shape
             if (Seq_NGrad < MAX_SHAPES) {
-                printf("Creating new gradient shape for trapezoid %d\n", SeqTrapTable.id[i]);
-                Seq_NGrad++;
+                shape_id = Seq_NGrad; // Use the new gradient shape ID
+                printf("Creating new gradient shape for trapezoid %d, with shapeindex %d\n", SeqTrapTable.id[i], shape_id);
                 SeqGradients[Seq_NGrad].id = Seq_NGrad;
 
                 int n_rise = (int)round(SeqTrapTable.rise_time[i] / gradrastertime);
@@ -355,6 +362,9 @@ void GradTrapToGradShape(double gradrastertime) {
 
                 SeqGradients[Seq_NGrad].num_samples = n_total;
                 SeqGradients[Seq_NGrad].samples = (double*)malloc(n_total * sizeof(double));
+
+
+                //TODO: Will convery these to paravision GRADSHAPE type function calls for consistency with other code
 
                 // Linear ramp up
                 for (int k = 0; k < n_rise; k++) {
@@ -370,12 +380,236 @@ void GradTrapToGradShape(double gradrastertime) {
                          (1.0 - (double)(k + 1) / n_fall);
                 }
 
-                // Optionally allocate and fill samples here
-                Seq_NGrad++;
             }
+
+            Seq_NGrad++;
         }
 
         // Store grad_shape_id for this trap
         SeqTrapTable.grad_shape_id[i] = shape_id;
     }
+}
+
+/*
+* Only available in paravision; PVM_ppgGradShape1 and PVM_ppgGradShape1Size .... are declared variables.
+void GradShapeToPPGShape(void);
+{
+    if (Seq_NGrad > 0) {
+        PVM_ppgGradShape1Size = SeqGradients[0].num_samples;
+        //PARX_change_dims("PVM_ppgGradShape1",PVM_ppgGradShape1Size);
+        LoadPPGShape(&PVM_ppgGradShape1, 0, PVM_ppgGradShape1Size);
+    }
+    if (Seq_NGrad > 1) {
+        PVM_ppgGradShape2Size = SeqGradients[1].num_samples;
+        //PARX_change_dims("PVM_ppgGradShape2",PVM_ppgGradShape1Size);
+        LoadPPGShape(&PVM_ppgGradShape2, 0, PVM_ppgGradShape2Size);
+    }
+    if (Seq_NGrad > 2) {
+        PVM_ppgGradShape3Size = SeqGradients[2].num_samples;
+        //PARX_change_dims("PVM_ppgGradShape3",PVM_ppgGradShape1Size);
+        LoadPPGShape(&PVM_ppgGradShape3, 0, PVM_ppgGradShape3Size);
+    }
+    if (Seq_NGrad > 3) {
+        PVM_ppgGradShape4Size = SeqGradients[3].num_samples;
+        //PARX_change_dims("PVM_ppgGradShape4",PVM_ppgGradShape1Size);
+        LoadPPGShape(&PVM_ppgGradShape4, 0, PVM_ppgGradShape4Size);
+    }
+    if (Seq_NGrad > 4) {
+        PVM_ppgGradShape5Size = SeqGradients[4].num_samples;
+        //PARX_change_dims("PVM_ppgGradShape5",PVM_ppgGradShape1Size);
+        LoadPPGShape(&PVM_ppgGradShape5, 0, PVM_ppgGradShape5Size);
+    }
+    if (Seq_NGrad > 5) {
+        PVM_ppgGradShape6Size = SeqGradients[5].num_samples;
+        //PARX_change_dims("PVM_ppgGradShape6",PVM_ppgGradShape1Size);
+        LoadPPGShape(&PVM_ppgGradShape6, 5, PVM_ppgGradShape6Size);
+    }
+}
+
+void LoadPPGShape(double *ppgGradShape, int shapeind, int shapesize)
+{
+        for (int i=0; i<shapesize; i++) {
+            ppgGradShape[i] = SeqGradients[shapeind].samples[i];
+        }
+}
+*/
+
+
+void WritePPG(const char* ppgfile) 
+{
+    FILE *fid = fopen(ppgfile, "w");
+    if (!fid) {
+        perror("Failed to open PPG file for writing");
+        return;
+    }
+
+    printf("Writing PPG file...\n");
+
+    fprintf(fid, "; PPG file\n");
+    fprintf(fid, ";\n");
+    fprintf(fid, "; Created from a Pulseq file\n");
+    fprintf(fid, ";\n\n");
+
+
+    //didn't need to declare shapes in ppg, these are already accessible as the variables
+    // for (int i =0; i<Seq_NGrad; i++) {
+    //     fprintf(fid, "#declare list<gradient> ppgGrad%d = {$PVM_ppgGradShape%d}  ;grad id %d\n",i, i, SeqGradients[i].id);
+    // }
+
+    fprintf(fid,"\n\n");
+
+    fprintf(fid, ";-------include files-------\n");
+    fprintf(fid, "#include <MRI.include>\n\n");
+
+
+    fprintf(fid, ";------shape reference------\n");
+    fprintf(fid, ";  rise  flat  fall \n");
+    for (int i = 0; i < Seq_NTrap; i++) {
+        int found = 0;
+        // Check if this combination already reported
+        for (int j = 0; j < i; j++) {
+            if (SeqTrapTable.grad_shape_id[j] == SeqTrapTable.grad_shape_id[i]) {
+                found = 1;
+                break;
+            }
+        }
+        if (!found) {
+            int shapeind = SeqTrapTable.grad_shape_id[i];
+            fprintf(fid,"  ; PVM_ppgGradShape%d is %du %du %du\n", shapeind, SeqTrapTable.rise_time[shapeind], SeqTrapTable.flat_time[shapeind], SeqTrapTable.fall_time[shapeind]);
+        }
+    }
+
+    fprintf(fid, "\n;-------definitions-------\n");
+    fprintf(fid, "preset off\n\n");
+    fprintf(fid, "INIT_DEVICES\n\n");
+
+    fprintf(fid, ";-------sequence-------\n");
+    fprintf(fid, "start,\n");
+
+    int fpcnt = 0;
+    int CommentColumn = 120; // Column to start comments
+    for (int b = 0; b < Seq_NBlocks; b++) {
+
+        if (SeqBlockTable.rf[b] > 0) {
+
+            fpcnt = fprintf(fid, "    10u gc_control ");
+            fprintf(fid, "%*s", CommentColumn - fpcnt, "");  // pad with spaces
+            fprintf(fid, "; block %d w RF\n", SeqBlockTable.num[b]);
+            fprintf(fid, "    {\n");
+
+            fprintf(fid, "        %du ", SeqBlockTable.dur[b]);
+            if (SeqBlockTable.gx[b] > 0 || SeqBlockTable.gy[b] > 0 || SeqBlockTable.gz[b] > 0) {
+                int gxind, gyind, gzind;
+                fpcnt += fprintf(fid, "grad_shape{");
+                if (SeqBlockTable.gx[b] > 0) {
+                    gxind = SeqBlockTable.gx[b] - 1;
+                    fprintf(fid, "PVM_ppgGradShape%d * %.3lf, ", SeqTrapTable.grad_shape_id[gxind], SeqTrapTable.amp_percent[gxind]);
+                } else {
+                    fprintf(fid, "0, ");
+                }
+                if (SeqBlockTable.gy[b] > 0) {
+                    gyind = SeqBlockTable.gy[b] - 1;
+                    fprintf(fid, "PVM_ppgGradShape%d * %.3lf, ", SeqTrapTable.grad_shape_id[gyind], SeqTrapTable.amp_percent[gyind]);
+                } else {
+                    fprintf(fid, "0, ");
+                }
+                if (SeqBlockTable.gz[b] > 0) {
+                    gzind = SeqBlockTable.gz[b] - 1;
+                    fprintf(fid, "PVM_ppgGradShape%d * %.3lf", SeqTrapTable.grad_shape_id[gzind], SeqTrapTable.amp_percent[gzind]);
+                } else {
+                    fprintf(fid, "0");
+                }
+                fprintf(fid, "}\n");
+                fprintf(fid, "    }; end gc_control\n");
+
+
+                fprintf(fid, "    %du ", SeqBlockTable.dur[b]);
+                fprintf(fid, "; RF PULSE GOES HERE\n\n");
+
+
+            } 
+            
+
+        } else if (SeqBlockTable.adc[b] > 0) {
+
+            fpcnt = fprintf(fid, "    10u gc_control ");
+            fprintf(fid, "%*s", CommentColumn - fpcnt, "");  // pad with spaces
+            fprintf(fid, "; block %d w ADC\n", SeqBlockTable.num[b]);
+            fprintf(fid, "    {\n");
+
+            fprintf(fid, "        %du ", SeqBlockTable.dur[b]);
+            if (SeqBlockTable.gx[b] > 0 || SeqBlockTable.gy[b] > 0 || SeqBlockTable.gz[b] > 0) {
+                int gxind, gyind, gzind;
+                fpcnt += fprintf(fid, "grad_shape{");
+                if (SeqBlockTable.gx[b] > 0) {
+                    gxind = SeqBlockTable.gx[b] - 1;
+                    fprintf(fid, "PVM_ppgGradShape%d * %.3lf, ", SeqTrapTable.grad_shape_id[gxind], SeqTrapTable.amp_percent[gxind]);
+                } else {
+                    fprintf(fid, "0, ");
+                }
+                if (SeqBlockTable.gy[b] > 0) {
+                    gyind = SeqBlockTable.gy[b] - 1;
+                    fprintf(fid, "PVM_ppgGradShape%d * %.3lf, ", SeqTrapTable.grad_shape_id[gyind], SeqTrapTable.amp_percent[gyind]);
+                } else {
+                    fprintf(fid, "0, ");
+                }
+                if (SeqBlockTable.gz[b] > 0) {
+                    gzind = SeqBlockTable.gz[b] - 1;
+                    fprintf(fid, "PVM_ppgGradShape%d * %.3lf", SeqTrapTable.grad_shape_id[gzind], SeqTrapTable.amp_percent[gzind]);
+                } else {
+                    fprintf(fid, "0");
+                }
+                fprintf(fid, "}\n");
+                fprintf(fid, "    }; end gc_control\n");
+
+
+                fprintf(fid, "    %du ", SeqBlockTable.dur[b]);
+                fprintf(fid, "; ADC GOES HERE\n\n");
+            }
+
+
+        } else {
+        // No RF or ADC, just a gradient block
+
+            fpcnt = fprintf(fid, "    %du ", SeqBlockTable.dur[b]);
+
+            if (SeqBlockTable.gx[b] > 0 || SeqBlockTable.gy[b] > 0 || SeqBlockTable.gz[b] > 0) {
+
+                int gxind, gyind, gzind;
+                fpcnt += fprintf(fid, "grad_shape{");
+
+                if (SeqBlockTable.gx[b] > 0) {
+                    gxind = SeqBlockTable.gx[b] - 1;
+                    fpcnt += fprintf(fid, "PVM_ppgGradShape%d * %.3lf, ", SeqTrapTable.grad_shape_id[gxind], SeqTrapTable.amp_percent[gxind]);
+                } else {
+                    fpcnt += fprintf(fid, "0, ");
+                }
+                if (SeqBlockTable.gy[b] > 0) {
+                    gyind = SeqBlockTable.gy[b] - 1;
+                    fpcnt += fprintf(fid, "PVM_ppgGradShape%d * %.3lf, ", SeqTrapTable.grad_shape_id[gyind], SeqTrapTable.amp_percent[gyind]);
+                } else {
+                    fpcnt += fprintf(fid, "0, ");
+                }
+                if (SeqBlockTable.gz[b] > 0) {
+                    gzind = SeqBlockTable.gz[b] - 1;
+                    fpcnt += fprintf(fid, "PVM_ppgGradShape%d * %.3lf", SeqTrapTable.grad_shape_id[gzind], SeqTrapTable.amp_percent[gzind]);
+                } else {
+                    fpcnt += fprintf(fid, "0");
+                }
+                fpcnt += fprintf(fid, "} ");
+            } 
+            
+            fprintf(fid, "%*s", CommentColumn - fpcnt, "");  // pad with spaces
+
+            fprintf(fid, "; block %d\n", SeqBlockTable.num[b]);
+        }
+
+
+        
+    }
+
+
+    fprintf(fid, "\n\nbye,    1u\n");
+    fprintf(fid, "exit,\n");
+
 }

@@ -61,11 +61,12 @@ typedef struct {
 typedef struct {
     int id[MAX_TRAP];
     double amp[MAX_TRAP]; 
-    double rise_time[MAX_TRAP];
-    double flat_time[MAX_TRAP];
-    double fall_time[MAX_TRAP];
-    double delay[MAX_TRAP];
+    int rise_time[MAX_TRAP];
+    int flat_time[MAX_TRAP];
+    int fall_time[MAX_TRAP];
+    int delay[MAX_TRAP];
     int grad_shape_id[MAX_TRAP]; // ID of the gradient shape created with this trapezoid
+    double amp_percent[MAX_TRAP]; // amp calculated as percentage of max gradient
 } TRAPTABLE;
 
 typedef struct {
@@ -143,6 +144,8 @@ void WritePPG(const char* ppgfile);
  * @return int Returns 0 on success, or an error code on failure.
  */
 void GradTrapToGradShape(double gradrastertime);
+void GradShapeToPPGShape(void);
+void LoadPPGShape(double *ppgGradShape, int shapeind, int shapesize);
 
 
 void UpdateSeq(void);
