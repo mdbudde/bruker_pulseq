@@ -522,9 +522,10 @@ void WritePPG(const char* ppgfile)
                 fprintf(fid, "}\n");
                 fprintf(fid, "    }; end gc_control\n");
 
-
-                fprintf(fid, "    %du ", SeqBlockTable.dur[b]);
-                fprintf(fid, "; RF PULSE GOES HERE\n\n");
+                int freqsettime = 60;  //need to figure this out.
+                fprintf(fid, "    %du freq:f1 gatepulse 1\n", freqsettime);
+                fprintf(fid, "    %du ", SeqBlockTable.dur[b] - freqsettime);
+                fprintf(fid, "; RF PULSE GOES HERE \n\n");
 
 
             } 

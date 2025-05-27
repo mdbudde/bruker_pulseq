@@ -29,7 +29,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape1 * -0.307, PVM_ppgGradShape2 * -1.658}                 ; block 2
     12u                                                                                                                 ; block 3
@@ -44,7 +45,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.296, PVM_ppgGradShape2 * -1.658}                 ; block 7
     12u                                                                                                                 ; block 8
@@ -59,7 +61,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.287, PVM_ppgGradShape2 * -1.658}                 ; block 12
     12u                                                                                                                 ; block 13
@@ -74,7 +77,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.277, PVM_ppgGradShape2 * -1.658}                 ; block 17
     12u                                                                                                                 ; block 18
@@ -89,7 +93,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.268, PVM_ppgGradShape2 * -1.658}                 ; block 22
     12u                                                                                                                 ; block 23
@@ -104,7 +109,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.258, PVM_ppgGradShape2 * -1.658}                 ; block 27
     12u                                                                                                                 ; block 28
@@ -119,7 +125,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.248, PVM_ppgGradShape2 * -1.658}                 ; block 32
     12u                                                                                                                 ; block 33
@@ -134,7 +141,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.239, PVM_ppgGradShape2 * -1.658}                 ; block 37
     12u                                                                                                                 ; block 38
@@ -149,7 +157,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.229, PVM_ppgGradShape2 * -1.658}                 ; block 42
     12u                                                                                                                 ; block 43
@@ -164,7 +173,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.220, PVM_ppgGradShape2 * -1.658}                 ; block 47
     12u                                                                                                                 ; block 48
@@ -179,7 +189,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.210, PVM_ppgGradShape2 * -1.658}                 ; block 52
     12u                                                                                                                 ; block 53
@@ -194,7 +205,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.201, PVM_ppgGradShape2 * -1.658}                 ; block 57
     12u                                                                                                                 ; block 58
@@ -209,7 +221,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.191, PVM_ppgGradShape2 * -1.658}                 ; block 62
     12u                                                                                                                 ; block 63
@@ -224,7 +237,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.182, PVM_ppgGradShape2 * -1.658}                 ; block 67
     12u                                                                                                                 ; block 68
@@ -239,7 +253,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.172, PVM_ppgGradShape2 * -1.658}                 ; block 72
     12u                                                                                                                 ; block 73
@@ -254,7 +269,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.162, PVM_ppgGradShape2 * -1.658}                 ; block 77
     12u                                                                                                                 ; block 78
@@ -269,7 +285,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.153, PVM_ppgGradShape2 * -1.658}                 ; block 82
     12u                                                                                                                 ; block 83
@@ -284,7 +301,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.143, PVM_ppgGradShape2 * -1.658}                 ; block 87
     12u                                                                                                                 ; block 88
@@ -299,7 +317,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.134, PVM_ppgGradShape2 * -1.658}                 ; block 92
     12u                                                                                                                 ; block 93
@@ -314,7 +333,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.124, PVM_ppgGradShape2 * -1.658}                 ; block 97
     12u                                                                                                                 ; block 98
@@ -329,7 +349,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.115, PVM_ppgGradShape2 * -1.658}                 ; block 102
     12u                                                                                                                 ; block 103
@@ -344,7 +365,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.105, PVM_ppgGradShape2 * -1.658}                 ; block 107
     12u                                                                                                                 ; block 108
@@ -359,7 +381,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.096, PVM_ppgGradShape2 * -1.658}                 ; block 112
     12u                                                                                                                 ; block 113
@@ -374,7 +397,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.086, PVM_ppgGradShape2 * -1.658}                 ; block 117
     12u                                                                                                                 ; block 118
@@ -389,7 +413,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.076, PVM_ppgGradShape2 * -1.658}                 ; block 122
     12u                                                                                                                 ; block 123
@@ -404,7 +429,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.067, PVM_ppgGradShape2 * -1.658}                 ; block 127
     12u                                                                                                                 ; block 128
@@ -419,7 +445,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.057, PVM_ppgGradShape2 * -1.658}                 ; block 132
     12u                                                                                                                 ; block 133
@@ -434,7 +461,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.048, PVM_ppgGradShape2 * -1.658}                 ; block 137
     12u                                                                                                                 ; block 138
@@ -449,7 +477,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.038, PVM_ppgGradShape2 * -1.658}                 ; block 142
     12u                                                                                                                 ; block 143
@@ -464,7 +493,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.029, PVM_ppgGradShape2 * -1.658}                 ; block 147
     12u                                                                                                                 ; block 148
@@ -479,7 +509,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.019, PVM_ppgGradShape2 * -1.658}                 ; block 152
     12u                                                                                                                 ; block 153
@@ -494,7 +525,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * -0.010, PVM_ppgGradShape2 * -1.658}                 ; block 157
     12u                                                                                                                 ; block 158
@@ -509,7 +541,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.000, PVM_ppgGradShape2 * -1.658}                  ; block 162
     12u                                                                                                                 ; block 163
@@ -524,7 +557,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.010, PVM_ppgGradShape2 * -1.658}                  ; block 167
     12u                                                                                                                 ; block 168
@@ -539,7 +573,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.019, PVM_ppgGradShape2 * -1.658}                  ; block 172
     12u                                                                                                                 ; block 173
@@ -554,7 +589,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.029, PVM_ppgGradShape2 * -1.658}                  ; block 177
     12u                                                                                                                 ; block 178
@@ -569,7 +605,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.038, PVM_ppgGradShape2 * -1.658}                  ; block 182
     12u                                                                                                                 ; block 183
@@ -584,7 +621,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.048, PVM_ppgGradShape2 * -1.658}                  ; block 187
     12u                                                                                                                 ; block 188
@@ -599,7 +637,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.057, PVM_ppgGradShape2 * -1.658}                  ; block 192
     12u                                                                                                                 ; block 193
@@ -614,7 +653,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.067, PVM_ppgGradShape2 * -1.658}                  ; block 197
     12u                                                                                                                 ; block 198
@@ -629,7 +669,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.076, PVM_ppgGradShape2 * -1.658}                  ; block 202
     12u                                                                                                                 ; block 203
@@ -644,7 +685,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.086, PVM_ppgGradShape2 * -1.658}                  ; block 207
     12u                                                                                                                 ; block 208
@@ -659,7 +701,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.096, PVM_ppgGradShape2 * -1.658}                  ; block 212
     12u                                                                                                                 ; block 213
@@ -674,7 +717,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.105, PVM_ppgGradShape2 * -1.658}                  ; block 217
     12u                                                                                                                 ; block 218
@@ -689,7 +733,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.115, PVM_ppgGradShape2 * -1.658}                  ; block 222
     12u                                                                                                                 ; block 223
@@ -704,7 +749,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.124, PVM_ppgGradShape2 * -1.658}                  ; block 227
     12u                                                                                                                 ; block 228
@@ -719,7 +765,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.134, PVM_ppgGradShape2 * -1.658}                  ; block 232
     12u                                                                                                                 ; block 233
@@ -734,7 +781,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.143, PVM_ppgGradShape2 * -1.658}                  ; block 237
     12u                                                                                                                 ; block 238
@@ -749,7 +797,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.153, PVM_ppgGradShape2 * -1.658}                  ; block 242
     12u                                                                                                                 ; block 243
@@ -764,7 +813,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.162, PVM_ppgGradShape2 * -1.658}                  ; block 247
     12u                                                                                                                 ; block 248
@@ -779,7 +829,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.172, PVM_ppgGradShape2 * -1.658}                  ; block 252
     12u                                                                                                                 ; block 253
@@ -794,7 +845,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.182, PVM_ppgGradShape2 * -1.658}                  ; block 257
     12u                                                                                                                 ; block 258
@@ -809,7 +861,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.191, PVM_ppgGradShape2 * -1.658}                  ; block 262
     12u                                                                                                                 ; block 263
@@ -824,7 +877,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.201, PVM_ppgGradShape2 * -1.658}                  ; block 267
     12u                                                                                                                 ; block 268
@@ -839,7 +893,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.210, PVM_ppgGradShape2 * -1.658}                  ; block 272
     12u                                                                                                                 ; block 273
@@ -854,7 +909,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.220, PVM_ppgGradShape2 * -1.658}                  ; block 277
     12u                                                                                                                 ; block 278
@@ -869,7 +925,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.229, PVM_ppgGradShape2 * -1.658}                  ; block 282
     12u                                                                                                                 ; block 283
@@ -884,7 +941,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.239, PVM_ppgGradShape2 * -1.658}                  ; block 287
     12u                                                                                                                 ; block 288
@@ -899,7 +957,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.248, PVM_ppgGradShape2 * -1.658}                  ; block 292
     12u                                                                                                                 ; block 293
@@ -914,7 +973,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.258, PVM_ppgGradShape2 * -1.658}                  ; block 297
     12u                                                                                                                 ; block 298
@@ -929,7 +989,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.268, PVM_ppgGradShape2 * -1.658}                  ; block 302
     12u                                                                                                                 ; block 303
@@ -944,7 +1005,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.277, PVM_ppgGradShape2 * -1.658}                  ; block 307
     12u                                                                                                                 ; block 308
@@ -959,7 +1021,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.287, PVM_ppgGradShape2 * -1.658}                  ; block 312
     12u                                                                                                                 ; block 313
@@ -974,7 +1037,8 @@ start,
     {
         416u grad_shape{0, 0, PVM_ppgGradShape0 * 1.585}
     }; end gc_control
-    416u ; RF PULSE GOES HERE
+    60u freq:f1 gatepulse 1
+    356u ; RF PULSE GOES HERE
 
     200u grad_shape{PVM_ppgGradShape1 * -0.308, PVM_ppgGradShape6 * 0.296, PVM_ppgGradShape2 * -1.658}                  ; block 317
     12u                                                                                                                 ; block 318
