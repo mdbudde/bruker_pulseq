@@ -16,5 +16,7 @@ int main() {
         printf("Failed to load sequence file '%s'. Error code: %d\n", filename, result);
     }
 
+    UpdateSeq();
+
     return 0;
 }

@@ -65,6 +65,7 @@ typedef struct {
     double flat_time[MAX_TRAP];
     double fall_time[MAX_TRAP];
     double delay[MAX_TRAP];
+    int grad_shape_id[MAX_TRAP]; // ID of the gradient shape created with this trapezoid
 } TRAPTABLE;
 
 typedef struct {
@@ -79,8 +80,15 @@ typedef struct {
     int num_samples;
     double* samples;
     int samples_loaded;
+    char shape_label[64];
 } SHAPE;
 
+
+typedef struct {
+    int id;
+    int num_samples;
+    double* samples;
+} GRADSHAPE;
 
 /**
  * @brief Loads a sequence from a file.
@@ -114,7 +122,7 @@ int decompressShape(SHAPE encoded, double *shape);
  * @param filename The path to the output file.
  * @return int Returns 0 on success, or an error code on failure.
  */
-int WriteShapeToExp(SHAPE encoded, const char* filename);
+void WriteShapeToExp(SHAPE encoded, const char* filename);
 
 /**
  * @brief Writes a PPG (Pulse Program) file.
@@ -124,7 +132,7 @@ int WriteShapeToExp(SHAPE encoded, const char* filename);
  * @param ppgfile The path to the output PPG file.
  * @return int Returns 0 on success, or an error code on failure.
  */
-int WritePPG(const char* ppgfile);
+void WritePPG(const char* ppgfile);
 
 /**
  * @brief Converts gradient trapezoids to gradient shapes.
@@ -134,8 +142,10 @@ int WritePPG(const char* ppgfile);
  *
  * @return int Returns 0 on success, or an error code on failure.
  */
-int GradTrapToGradShape(void);
+void GradTrapToGradShape(double gradrastertime);
 
+
+void UpdateSeq(void);
 
 
 #endif // LOADSEQUENCE_H
