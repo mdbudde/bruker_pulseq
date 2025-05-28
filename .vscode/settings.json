@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.e": "c",
+        "pulseqinterpreter.h": "c"
+    }
+}

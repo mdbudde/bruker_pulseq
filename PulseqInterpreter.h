@@ -20,7 +20,6 @@
 #include <string.h>
 
 
-
 #define MAX_LINE 1024
 #define MAX_BLOCKS 2048
 #define MAX_RF 256
@@ -29,8 +28,11 @@
 #define MAX_SHAPES 512
 
 // SECTION STRUCTS; these will become paravision types in the sequence method
+// internal additions to the pulseq-defined types include "added" in the comment
 typedef struct {
-    int major, minor, revision;
+    int major;
+    int minor;
+    int revision;
 } Version;
 
 typedef struct {
@@ -61,29 +63,30 @@ typedef struct {
 typedef struct {
     int id[MAX_TRAP];
     double amp[MAX_TRAP]; 
-    int rise_time[MAX_TRAP];
-    int flat_time[MAX_TRAP];
-    int fall_time[MAX_TRAP];
+    int rise_time[MAX_TRAP];  //int in microseconds
+    int flat_time[MAX_TRAP];  //int in microseconds
+    int fall_time[MAX_TRAP];  //int in microseconds
     int delay[MAX_TRAP];
-    int grad_shape_id[MAX_TRAP]; // ID of the gradient shape created with this trapezoid
-    double amp_percent[MAX_TRAP]; // amp calculated as percentage of max gradient
+    int grad_shape_id[MAX_TRAP]; // added: ID of the gradient shape created with this trapezoid
+    double amp_percent[MAX_TRAP]; // added: amp calculated as percentage of max gradient
 } TRAPTABLE;
 
 typedef struct {
     int id[MAX_ADC];
     int num_samples[MAX_ADC];
-    double dwell[MAX_ADC];
-    int delay[MAX_ADC];
+    int dwell[MAX_ADC];  //int in nanoseconds
+    int delay[MAX_ADC];  //in in microseconds
+    double freq[MAX_ADC];
+    double phase[MAX_ADC];
 } ADCTABLE;
 
 typedef struct {
     int id;
     int num_samples;
     double* samples;
-    int samples_loaded;
-    char shape_label[64];
+    int samples_loaded;    //added: to track how many samples have been loaded; is shape compressed if samples_loaded < num_samples? 
+    char shape_label[64];  //added: to help identify shapes/external files
 } SHAPE;
-
 
 typedef struct {
     int id;
@@ -101,6 +104,12 @@ typedef struct {
  * @return int Returns 0 on success, or an error code on failure.
  */
 int LoadSequenceFile(const char* filename);
+
+/**
+ * @brief Updates the sequence data. Main Paravision function in backbone
+ */
+void UpdateSeq(void);
+
 
 /**
  * @brief Decompresses an encoded shape into a raw shape array.
@@ -146,9 +155,6 @@ void WritePPG(const char* ppgfile);
 void GradTrapToGradShape(double gradrastertime);
 void GradShapeToPPGShape(void);
 void LoadPPGShape(double *ppgGradShape, int shapeind, int shapesize);
-
-
-void UpdateSeq(void);
 
 
 #endif // LOADSEQUENCE_H

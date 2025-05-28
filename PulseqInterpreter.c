@@ -1,5 +1,5 @@
-//GPT-based pure c for loading pulseq files. 
-//Designed to be easier to integrate into method loading. 
+//GPT-assisted pure c for loading pulseq files. 
+//Designed to be easier to integrate into method loading than c++. 
 //need to include many additional functions/features from ExternalSequences.cpp
 
 
@@ -8,10 +8,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include "LoadSequence.h"
+#include "PulseqInterpreter.h"
 
 
-// GLOBAL STORAGE; these will move to paravision variables in the sequence method
+//---- GLOBAL STORAGE; these will move to paravision variables in the sequence method
 Version version;
 Definitions defs;
 BLOCKTABLE SeqBlockTable; 
@@ -31,6 +31,10 @@ int Seq_NADC = 0;
 int Seq_NShapes = 0;
 int Seq_NGrad = 0;
 
+//---- END of variables that will be moved to paravision variables in the sequence method
+
+
+
 // Function to trim newline characters from a string
 void trim_newline(char *line) {
     line[strcspn(line, "\r\n")] = 0;
@@ -46,11 +50,16 @@ void free_shapes() {
 
 void UpdateSeq(void) {
 
+
+    printf("-->Starting UpdateSeq.\n");
+
+    printf("\n\nWriting shape files...\n");
     for (int i = 0; i < Seq_NShapes; i++) {
         char filename[64];
         snprintf(filename, sizeof(filename), "pulseq_shape_%d.exc", SeqShapes[i].id);
         WriteShapeToExp(SeqShapes[i], filename);
     }
+    printf("Done.\n");
 
     // Convert trapezoids to gradient shapes
     double gradrastertime = 8e-3; // in seconds; for testing make small. 
@@ -59,16 +68,23 @@ void UpdateSeq(void) {
     //GradShapeToPPGShape();
 
     WritePPG("pulseq.ppg");
+
+    printf("<--End UpdateSeq\n\n");
 }
 
 // Function to load a sequence file
 int LoadSequenceFile(const char* filename) {
+
+
+    printf("-->Starting LoadSequenceFile.\n");
+
     FILE *fp = fopen(filename, "r");
     if (!fp) {
         perror("Failed to open file");
         return 1;
     }
 
+    printf("Loading seq file %s\n",filename);
     char line[MAX_LINE], section[MAX_LINE] = "";
     int shape_sample_mode = 0; // if > 0, we're in SHAPES data
     int num_loaded = 0; // Count of loaded samples
@@ -79,6 +95,7 @@ int LoadSequenceFile(const char* filename) {
             continue;
 
         if (line[0] == '[') {
+            printf("  Loading Section %s\n",line);
             strncpy(section, line, sizeof(section));
             shape_sample_mode = 0;
             continue;
@@ -169,7 +186,7 @@ int LoadSequenceFile(const char* filename) {
                 int id, num_samples;
                 num_loaded = 0;
                 if (sscanf(line, "shape_id %d", &id) == 1) {
-                    printf("Loading shape with ID: %d\n", id);
+                    printf("  Loading shape with ID: %d\n", id);
                     Seq_NShapes++;
                     if (Seq_NShapes < MAX_SHAPES) {
                         curr_shape = &SeqShapes[Seq_NShapes - 1];
@@ -192,7 +209,7 @@ int LoadSequenceFile(const char* filename) {
     }
 
     fclose(fp);
-    printf("Sequence file '%s' loaded successfully.\n", filename);
+    printf("Sequence file '%s' loaded successfully.\n\n", filename);
 
     // Print Summary
     printf("VERSION: %d.%d.%d\n", version.major, version.minor, version.revision);
@@ -201,10 +218,10 @@ int LoadSequenceFile(const char* filename) {
     printf("BLOCKS: %d | RF: %d | TRAP: %d | ADC: %d | SHAPES: %d\n",
            Seq_NBlocks, Seq_NRF, Seq_NTrap, Seq_NADC, Seq_NShapes);
 
-
+    printf("\nChecking shape compression...\n");
     for (int i = 0; i < Seq_NShapes; i++) {
         if (SeqShapes[i].num_samples > SeqShapes[i].samples_loaded) {
-            printf("Shape ID %d: runtime compressed\n", SeqShapes[i].id);
+            printf("  Shape ID %d: runtime compressed\n", SeqShapes[i].id);
             double shape[SeqShapes[i].num_samples]; // Allocate shape array
             if (decompressShape(SeqShapes[i], shape)) {
                 for (int j = 0; j < SeqShapes[i].num_samples; j++) {
@@ -212,10 +229,12 @@ int LoadSequenceFile(const char* filename) {
                 }
             }
         } else {
-            printf("Shape ID %d: not runtime compressed\n", SeqShapes[i].id);
+            printf("  Shape ID %d: not runtime compressed\n", SeqShapes[i].id);
         }
     }
+    printf("Done.\n");
 
+    printf("<--End LoadSequenceFile.\n");
 
     // Free shapes
     //free_shapes();
@@ -271,7 +290,7 @@ int decompressShape(SHAPE encoded, double *shape)
         shape[i] = shape[i] + shape[i - 1];  
         // printf("  %d  %lf\n", i, shape[i]);
     }
-    printf("Shape ID %d: Decompressed to %d samples\n", encoded.id, numSamples);
+    printf("  Shape ID %d: Decompressed to %d samples\n", encoded.id, numSamples);
     return 1;
 }
 
@@ -290,6 +309,7 @@ void WriteShapeToExp(SHAPE shape, const char* filename)
     }
     double integralRatio = s_sum / (100.0 * shape.num_samples);
     
+    printf("  Writing shape file...\n");
 
     FILE *fid = fopen(filename, "w");
     if (!fid) {
@@ -325,12 +345,14 @@ void WriteShapeToExp(SHAPE shape, const char* filename)
 
     fclose(fid);
 
-    printf("Shape written to %s\n", filename);
+    printf("  Shape written to %s\n", filename);
 
 }
 
 
 void GradTrapToGradShape(double gradrastertime) {
+
+    printf("\n\nConverting trapezoids to gradient shapes...\n");
     // Convert trapezoids to gradient shapes
     for (int i = 0; i < Seq_NTrap; i++) {
         int found = 0;
@@ -343,7 +365,7 @@ void GradTrapToGradShape(double gradrastertime) {
                 (SeqTrapTable.fall_time[i] == SeqTrapTable.fall_time[j]))  {
                 found = 1;
                 shape_id = SeqTrapTable.grad_shape_id[j]; // Use existing shape ID
-                printf("Trapezoid %d matches %d, with shapeindex %d\n", SeqTrapTable.id[i], SeqTrapTable.id[j], shape_id);
+                printf("  Trapezoid %d matches %d, with shapeindex %d\n", SeqTrapTable.id[i], SeqTrapTable.id[j], shape_id);
                 break;
             }
         }
@@ -352,7 +374,7 @@ void GradTrapToGradShape(double gradrastertime) {
             // Add new shape
             if (Seq_NGrad < MAX_SHAPES) {
                 shape_id = Seq_NGrad; // Use the new gradient shape ID
-                printf("Creating new gradient shape for trapezoid %d, with shapeindex %d\n", SeqTrapTable.id[i], shape_id);
+                printf("  Creating new gradient shape for trapezoid %d, with shapeindex %d\n", SeqTrapTable.id[i], shape_id);
                 SeqGradients[Seq_NGrad].id = Seq_NGrad;
 
                 int n_rise = (int)round(SeqTrapTable.rise_time[i] / gradrastertime);
@@ -388,6 +410,8 @@ void GradTrapToGradShape(double gradrastertime) {
         // Store grad_shape_id for this trap
         SeqTrapTable.grad_shape_id[i] = shape_id;
     }
+
+    printf("Done.\n");
 }
 
 /*
@@ -443,7 +467,8 @@ void WritePPG(const char* ppgfile)
         return;
     }
 
-    printf("Writing PPG file...\n");
+    printf("\n\nWriting PPG file...\n");
+    printf("  %s\n",ppgfile);
 
     fprintf(fid, "; PPG file\n");
     fprintf(fid, ";\n");
@@ -612,5 +637,8 @@ void WritePPG(const char* ppgfile)
 
     fprintf(fid, "\n\nbye,    1u\n");
     fprintf(fid, "exit,\n");
+
+
+    printf("Done. %s...\n\n", ppgfile);
 
 }

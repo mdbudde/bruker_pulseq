@@ -3,7 +3,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -O2 -std=c99
 TARGET = loadseqtest
-SRC = loadseqtest.c LoadSequence.c
+SRC = loadseqtest.c PulseqInterpreter.c
 
 all: $(TARGET)
 
