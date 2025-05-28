@@ -19,7 +19,7 @@ Why?
 The first implementation to wrap all c++ functions to make them c accessible was difficult and messy.
 With ai tools, rewriting the code in c should be easy enough to rebuild, and c is more familiar to the majority of paravision programmers (us).
 
-In the LoadSequence.c file, the structures will be converted to paravision variables that are fully accessible in all parts of the code.
+In the PulseqInterpreter.c file, the structures will be converted to paravision variables that are fully accessible in all parts of the code.
 I have done this for a load instructions from a similarly-formatted file (diffusion weighted directions and artbitary waveforms) and works quite well.
 
 email me (mdbudde@mcw.edu) with any questions or access to the private repo. 
