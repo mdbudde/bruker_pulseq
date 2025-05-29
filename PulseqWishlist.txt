@@ -1,0 +1,21 @@
+Wishlist/comments for pulseq developers:
+
+Add additional tags for shapes:
+shape_label char  ; to identify shapes for basic knowledge, sinc, gauss, tanh, etc...
+shape_type char   ; to identify and/or influence interpreter, rfmag, rfphase, grad, rfmagphase, ... it is highly unlikely the same shape will be used for multiple purposes.
+
+
+Designate type of RF pulse:
+excitation, refocus, inversion, etc... ; to help write the correct file for Bruker/Paravision, which constrains pulses based on their utility (excite<=90; refocus<=180; inversion=any)
+rfmag and rfphase within stored shape  ; permit the pulse mag and phase data to be included in a single MAG PHASE line instead of separate shapes; possible add shape_type rfmagphase to inform the reading of such data.
+
+
+Definitions:
+Name char  ; give the seq file an identifier for the user: gre_v1.1, mprage_5-10-25, etc ...
+Possibly other metadata, make it ignored if not included (optional)
+
+
+Gradient and timing constraints:
+Currently, blocks are permitted to have delays that do not match the duration of the gradients within the block. 
+Why not constrain the blocks to ensure the gradients and durations match?
+The Bruker/Paravision interpreter will have to 

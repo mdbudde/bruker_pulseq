@@ -11,7 +11,7 @@ AdcRasterTime 1e-07
 BlockDurationRaster 1e-05 
 FOV 0.25 0.25 0.003 
 GradientRasterTime 1e-05 
-Name gre 
+Name greExamplewithAdditions 
 RadiofrequencyRasterTime 1e-06 
 
 # Format of blocks:
@@ -478,7 +478,7 @@ RadiofrequencyRasterTime 1e-06
 
 shape_id 1
 shape_label sinc
-shape_type rf
+shape_type rfmag
 num_samples 4000
 3.85627869e-11
 1.04171238e-09
@@ -4482,8 +4482,8 @@ num_samples 4000
 3.85627869e-11
 
 shape_id 2
-shape_label composite
-shape_type rf
+shape_label sincphase
+shape_type rfphase
 num_samples 4000
 0.5
 0

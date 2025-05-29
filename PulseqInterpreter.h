@@ -38,6 +38,7 @@ typedef struct {
 typedef struct {
     double FOV[3];
     double GradientRasterTime;
+    char Name[64]; // added: name of the sequence
 } Definitions;
 
 typedef struct {
@@ -86,6 +87,7 @@ typedef struct {
     double* samples;
     int samples_loaded;    //added: to track how many samples have been loaded; is shape compressed if samples_loaded < num_samples? 
     char shape_label[64];  //added: to help identify shapes/external files
+    char shape_type[64];   //added: to help identify shapes/external files
 } SHAPE;
 
 typedef struct {

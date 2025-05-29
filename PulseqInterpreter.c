@@ -7,7 +7,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
+#include <math.h> 
+#include <time.h>
 #include "PulseqInterpreter.h"
 
 
@@ -21,8 +22,16 @@ ADCTABLE SeqADCTable;
 SHAPE SeqShapes[MAX_SHAPES]; 
 GRADSHAPE SeqGradients[MAX_SHAPES]; 
 
+double SeqRFFrequencyList[] = {0.0}; // List of RF frequencies, will be filled in by RF table
+double SeqRFPowerList[] = {0.0}; // List of RF powers, will be filled in by RF table
+double SeqRFPhaseList[] = {0.0}; // List of RF phases, will be filled in by RF table
+
+char SeqFilename[256] = ""; // Name of the sequence file to load
+char SeqIdentString[256] = ""; // Name stored in seq file
+
 double gyromagnetic_ratio = 42.576e3; // MHz/T for 1H, will get from PV for this nucleus
 double GradMax = 494.0; // Maximum gradient amplitude in mT/m, will get from PV
+int InterGradientWaitTime = 20; // in microseconds, will get from PV
 
 int Seq_NBlocks = 0;
 int Seq_NRF = 0;
@@ -49,8 +58,6 @@ void free_shapes() {
 
 
 void UpdateSeq(void) {
-
-
     printf("-->Starting UpdateSeq.\n");
 
     printf("\n\nWriting shape files...\n");
@@ -75,14 +82,15 @@ void UpdateSeq(void) {
 // Function to load a sequence file
 int LoadSequenceFile(const char* filename) {
 
-
     printf("-->Starting LoadSequenceFile.\n");
 
     FILE *fp = fopen(filename, "r");
     if (!fp) {
         perror("Failed to open file");
+        SeqFilename[0] = '\0'; // Clear filename on error
         return 1;
     }
+    strcpy(SeqFilename, filename);
 
     printf("Loading seq file %s\n",filename);
     char line[MAX_LINE], section[MAX_LINE] = "";
@@ -108,6 +116,7 @@ int LoadSequenceFile(const char* filename) {
         } else if (strcmp(section, "[DEFINITIONS]") == 0) {
             sscanf(line, "FOV %lf %lf %lf", &defs.FOV[0], &defs.FOV[1], &defs.FOV[2]);
             sscanf(line, "GradientRasterTime %lf", &defs.GradientRasterTime);
+            sscanf(line, "Name %s", SeqIdentString);
         } else if (strcmp(section, "[BLOCKS]") == 0) {
             if (Seq_NBlocks < MAX_BLOCKS) {
                 int num, dur, rf, gx, gy, gz, adc, ext;
@@ -196,6 +205,8 @@ int LoadSequenceFile(const char* filename) {
                     }
                 } else if (strncmp(line, "shape_label", 11) == 0 && curr_shape) {
                     sscanf(line, "shape_label %s", curr_shape->shape_label);
+                } else if (strncmp(line, "shape_type", 10) == 0 && curr_shape) {
+                    sscanf(line, "shape_type %s", curr_shape->shape_type);
                 } else if (sscanf(line, "num_samples %d", &num_samples) == 1 && curr_shape) {
                     curr_shape->num_samples = num_samples;
                     curr_shape->samples = (double*)malloc(num_samples * sizeof(double));
@@ -426,22 +437,22 @@ void GradShapeToPPGShape(void);
     if (Seq_NGrad > 1) {
         PVM_ppgGradShape2Size = SeqGradients[1].num_samples;
         //PARX_change_dims("PVM_ppgGradShape2",PVM_ppgGradShape1Size);
-        LoadPPGShape(&PVM_ppgGradShape2, 0, PVM_ppgGradShape2Size);
+        LoadPPGShape(&PVM_ppgGradShape2, 1, PVM_ppgGradShape2Size);
     }
     if (Seq_NGrad > 2) {
         PVM_ppgGradShape3Size = SeqGradients[2].num_samples;
         //PARX_change_dims("PVM_ppgGradShape3",PVM_ppgGradShape1Size);
-        LoadPPGShape(&PVM_ppgGradShape3, 0, PVM_ppgGradShape3Size);
+        LoadPPGShape(&PVM_ppgGradShape3, 2, PVM_ppgGradShape3Size);
     }
     if (Seq_NGrad > 3) {
         PVM_ppgGradShape4Size = SeqGradients[3].num_samples;
         //PARX_change_dims("PVM_ppgGradShape4",PVM_ppgGradShape1Size);
-        LoadPPGShape(&PVM_ppgGradShape4, 0, PVM_ppgGradShape4Size);
+        LoadPPGShape(&PVM_ppgGradShape4, 3, PVM_ppgGradShape4Size);
     }
     if (Seq_NGrad > 4) {
         PVM_ppgGradShape5Size = SeqGradients[4].num_samples;
         //PARX_change_dims("PVM_ppgGradShape5",PVM_ppgGradShape1Size);
-        LoadPPGShape(&PVM_ppgGradShape5, 0, PVM_ppgGradShape5Size);
+        LoadPPGShape(&PVM_ppgGradShape5, 4, PVM_ppgGradShape5Size);
     }
     if (Seq_NGrad > 5) {
         PVM_ppgGradShape6Size = SeqGradients[5].num_samples;
@@ -472,7 +483,17 @@ void WritePPG(const char* ppgfile)
 
     fprintf(fid, "; PPG file\n");
     fprintf(fid, ";\n");
-    fprintf(fid, "; Created from a Pulseq file\n");
+    fprintf(fid, "; Created from seq file: %s \n", SeqFilename);
+    fprintf(fid, "; Seq file Name tag: %s \n", SeqIdentString);
+
+    // Get current date and time
+   
+    time_t now = time(NULL);
+    struct tm *t = localtime(&now);
+    // Write formatted date and time to the file
+    fprintf(fid, "; Date: %04d-%02d-%02d\n", t->tm_year + 1900, t->tm_mon + 1, t->tm_mday);
+    fprintf(fid, "; Time: %02d:%02d:%02d\n", t->tm_hour, t->tm_min, t->tm_sec);
+
     fprintf(fid, ";\n\n");
 
 
@@ -487,8 +508,16 @@ void WritePPG(const char* ppgfile)
     fprintf(fid, "#include <MRI.include>\n\n");
 
 
-    fprintf(fid, ";------shape reference------\n");
-    fprintf(fid, ";  rise  flat  fall \n");
+    fprintf(fid, "\n;-------rf lists-------\n");
+    fprintf(fid, "define list<frequency> freqList = {$SeqRFFrequencyList}\n");
+    fprintf(fid, "define list<phase> phaseList = {$SeqRFPhaseList}\n");
+    fprintf(fid, "define list<power> powList = {Watt $SeqRFPowerList}\n");
+    fprintf(fid, "\n");
+
+
+    fprintf(fid, ";-----gradient shapes-----\n");
+    fprintf(fid, "; for reference, unnecessary to explicitly redefine here in ppg\n");
+    fprintf(fid, "; rise  flat  fall \n");
     for (int i = 0; i < Seq_NTrap; i++) {
         int found = 0;
         // Check if this combination already reported
@@ -503,6 +532,8 @@ void WritePPG(const char* ppgfile)
             fprintf(fid,"  ; PVM_ppgGradShape%d is %du %du %du\n", shapeind, SeqTrapTable.rise_time[shapeind], SeqTrapTable.flat_time[shapeind], SeqTrapTable.fall_time[shapeind]);
         }
     }
+
+
 
     fprintf(fid, "\n;-------definitions-------\n");
     fprintf(fid, "preset off\n\n");
@@ -545,57 +576,72 @@ void WritePPG(const char* ppgfile)
                     fprintf(fid, "0");
                 }
                 fprintf(fid, "}\n");
-                fprintf(fid, "    }; end gc_control\n");
+                fprintf(fid, "    } ");
 
-                int freqsettime = 60;  //need to figure this out.
-                fprintf(fid, "    %du freq:f1 gatepulse 1\n", freqsettime);
-                fprintf(fid, "    %du ", SeqBlockTable.dur[b] - freqsettime);
-                fprintf(fid, "; RF PULSE GOES HERE \n\n");
 
+                //int freqsettime = 60;  //need to figure this out.
+                fprintf(fid, "  freqList:f1  powList:f1  gatepulse 1  ; possible in gc_control command?\n");
+                //fprintf(fid, "    ;%du ", SeqBlockTable.dur[b]);
+                fpcnt = fprintf(fid, "        (p0:sp0(currentpower) phaseList):f1 ");
+                fprintf(fid, "%*s", CommentColumn - fpcnt, "");  // pad with spaces
+                fprintf(fid, "; continuation\n");
+                
+                fpcnt = fprintf(fid, "        %du freqList.inc powList.inc phaseList.inc ",InterGradientWaitTime);
+                fprintf(fid, "%*s", CommentColumn - fpcnt, "");  // pad with spaces
+                fprintf(fid, "; implied block, igwt\n");
+
+                fprintf(fid, "\n");
 
             } 
             
 
         } else if (SeqBlockTable.adc[b] > 0) {
 
-            fpcnt = fprintf(fid, "    10u gc_control ");
-            fprintf(fid, "%*s", CommentColumn - fpcnt, "");  // pad with spaces
-            fprintf(fid, "; block %d w ADC\n", SeqBlockTable.num[b]);
-            fprintf(fid, "    {\n");
+            // fpcnt = fprintf(fid, "    10u gc_control ");
+            // fprintf(fid, "    {\n");
 
-            fprintf(fid, "        %du ", SeqBlockTable.dur[b]);
+
+
+
+            fpcnt = fprintf(fid, "    %du ADC_START ", SeqBlockTable.dur[b]);
             if (SeqBlockTable.gx[b] > 0 || SeqBlockTable.gy[b] > 0 || SeqBlockTable.gz[b] > 0) {
                 int gxind, gyind, gzind;
                 fpcnt += fprintf(fid, "grad_shape{");
                 if (SeqBlockTable.gx[b] > 0) {
                     gxind = SeqBlockTable.gx[b] - 1;
-                    fprintf(fid, "PVM_ppgGradShape%d * %.3lf, ", SeqTrapTable.grad_shape_id[gxind], SeqTrapTable.amp_percent[gxind]);
+                    fpcnt += fprintf(fid, "PVM_ppgGradShape%d * %.3lf, ", SeqTrapTable.grad_shape_id[gxind], SeqTrapTable.amp_percent[gxind]);
                 } else {
-                    fprintf(fid, "0, ");
+                    fpcnt += fprintf(fid, "0, ");
                 }
                 if (SeqBlockTable.gy[b] > 0) {
                     gyind = SeqBlockTable.gy[b] - 1;
-                    fprintf(fid, "PVM_ppgGradShape%d * %.3lf, ", SeqTrapTable.grad_shape_id[gyind], SeqTrapTable.amp_percent[gyind]);
+                    fpcnt += fprintf(fid, "PVM_ppgGradShape%d * %.3lf, ", SeqTrapTable.grad_shape_id[gyind], SeqTrapTable.amp_percent[gyind]);
                 } else {
-                    fprintf(fid, "0, ");
+                    fpcnt += fprintf(fid, "0, ");
                 }
                 if (SeqBlockTable.gz[b] > 0) {
                     gzind = SeqBlockTable.gz[b] - 1;
-                    fprintf(fid, "PVM_ppgGradShape%d * %.3lf", SeqTrapTable.grad_shape_id[gzind], SeqTrapTable.amp_percent[gzind]);
+                    fpcnt += fprintf(fid, "PVM_ppgGradShape%d * %.3lf", SeqTrapTable.grad_shape_id[gzind], SeqTrapTable.amp_percent[gzind]);
                 } else {
-                    fprintf(fid, "0");
+                    fpcnt += fprintf(fid, "0");
                 }
-                fprintf(fid, "}\n");
-                fprintf(fid, "    }; end gc_control\n");
+                fpcnt += fprintf(fid, "} ");
+                // fprintf(fid, "    }; end gc_control\n");
 
+                fprintf(fid, "%*s", CommentColumn - fpcnt, "");  // pad with spaces
+                fprintf(fid, "; block %d w ADC\n", SeqBlockTable.num[b]);
 
-                fprintf(fid, "    %du ", SeqBlockTable.dur[b]);
-                fprintf(fid, "; ADC GOES HERE\n\n");
+                // fprintf(fid, "    %du ", SeqBlockTable.dur[b]);
+
+                fpcnt = fprintf(fid, "        %du ADC_END ", InterGradientWaitTime);
+                fprintf(fid, "%*s", CommentColumn - fpcnt, "");  // pad with spaces
+                fprintf(fid, "; implied block, igwt\n");
+                fprintf(fid, " \n");
+
             }
 
-
         } else {
-        // No RF or ADC, just a gradient block
+        // No RF or ADC, just a gradient or delay block
 
             fpcnt = fprintf(fid, "    %du ", SeqBlockTable.dur[b]);
 
@@ -623,13 +669,20 @@ void WritePPG(const char* ppgfile)
                     fpcnt += fprintf(fid, "0");
                 }
                 fpcnt += fprintf(fid, "} ");
+
             } 
             
             fprintf(fid, "%*s", CommentColumn - fpcnt, "");  // pad with spaces
-
             fprintf(fid, "; block %d\n", SeqBlockTable.num[b]);
+
         }
 
+        // write the ADC initialization if the next block has ADC
+        if ((b > 0) && (SeqBlockTable.adc[b + 1] > 0)) {
+            fpcnt = fprintf(fid, "    ADC_INIT_B(NOPH, phaseRList) ");
+            fprintf(fid, "%*s", CommentColumn - fpcnt, "");  // pad with spaces
+            fprintf(fid, "; implied block, igwt\n");
+        }
 
         
     }
