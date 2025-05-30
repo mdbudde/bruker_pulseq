@@ -8,7 +8,8 @@ revision 1
 
 [DEFINITIONS]
 AdcRasterTime 1e-07 
-BlockDurationRaster 1e-05 
+BlockDurationRaster 1e-05
+# note the FOV and gradient amplitudes are small for animal scanners in this seq 
 FOV 0.25 0.25 0.003 
 GradientRasterTime 1e-05 
 Name greExamplewithAdditions 

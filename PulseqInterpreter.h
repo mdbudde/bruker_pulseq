@@ -39,6 +39,7 @@ typedef struct {
     double FOV[3];
     double GradientRasterTime;
     char Name[64]; // added: name of the sequence
+    double Totaltime;  //added: derived from all blocks
 } Definitions;
 
 typedef struct {
@@ -50,14 +51,20 @@ typedef struct {
     int gz[MAX_BLOCKS];
     int adc[MAX_BLOCKS];
     int ext[MAX_BLOCKS];
+    int gx_shape_id[MAX_BLOCKS]; // added to store gradient shape IDs
+    int gy_shape_id[MAX_BLOCKS]; // added to store gradient shape IDs
+    int gz_shape_id[MAX_BLOCKS]; //added to store gradient shape IDs
 } BLOCKTABLE;
 
 typedef struct {
     int id[MAX_RF];
-    double delay[MAX_RF];
+    double amplitude[MAX_RF];
+    int mag_id[MAX_RF];
+    int phase_id[MAX_RF];
+    int time_shape_id[MAX_RF];
+    int delay[MAX_RF];
     double freq[MAX_RF]; 
     double phase[MAX_RF];
-    double amp[MAX_RF];
     int shape_id[MAX_RF];
 } RFTABLE;
 
@@ -74,7 +81,7 @@ typedef struct {
 
 typedef struct {
     int id[MAX_ADC];
-    int num_samples[MAX_ADC];
+    int num[MAX_ADC];
     int dwell[MAX_ADC];  //int in nanoseconds
     int delay[MAX_ADC];  //in in microseconds
     double freq[MAX_ADC];
@@ -94,6 +101,10 @@ typedef struct {
     int id;
     int num_samples;
     double* samples;
+    int rise_time; 
+    int flat_time;
+    int fall_time;
+    int duration;
 } GRADSHAPE;
 
 /**
@@ -112,6 +123,24 @@ int LoadSequenceFile(const char* filename);
  */
 void UpdateSeq(void);
 
+/**
+ * @brief Store or translate to ParaVision parameters.
+ */
+void SetPVparams(void);
+
+/**
+ * @brief Update ppg lists in method variables
+ */
+void UpdateRF(void);
+
+/**
+ * @brief Update ppg lists in method variables
+ */
+void UpdateADC(void);
+/**
+ * @brief Update ppg lists in method variables
+ */
+void UpdateGrad(void);
 
 /**
  * @brief Decompresses an encoded shape into a raw shape array.
@@ -134,7 +163,7 @@ int decompressShape(SHAPE encoded, double *shape);
  * @param filename The path to the output file.
  * @return int Returns 0 on success, or an error code on failure.
  */
-void WriteShapeToExp(SHAPE encoded, const char* filename);
+void WriteRFShapeToExp(SHAPE shape, const char* filename, double* phase_samples); 
 
 /**
  * @brief Writes a PPG (Pulse Program) file.
@@ -154,7 +183,6 @@ void WritePPG(const char* ppgfile);
  *
  * @return int Returns 0 on success, or an error code on failure.
  */
-void GradTrapToGradShape(double gradrastertime);
 void GradShapeToPPGShape(void);
 void LoadPPGShape(double *ppgGradShape, int shapeind, int shapesize);
 

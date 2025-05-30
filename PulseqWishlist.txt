@@ -1,21 +1,25 @@
 Wishlist/comments for pulseq developers:
 
-Add additional tags for shapes:
-shape_label char  ; to identify shapes for basic knowledge, sinc, gauss, tanh, etc...
-shape_type char   ; to identify and/or influence interpreter, rfmag, rfphase, grad, rfmagphase, ... it is highly unlikely the same shape will be used for multiple purposes.
-
-
-Designate type of RF pulse:
-excitation, refocus, inversion, etc... ; to help write the correct file for Bruker/Paravision, which constrains pulses based on their utility (excite<=90; refocus<=180; inversion=any)
-rfmag and rfphase within stored shape  ; permit the pulse mag and phase data to be included in a single MAG PHASE line instead of separate shapes; possible add shape_type rfmagphase to inform the reading of such data.
-
-
+EASY:
 Definitions:
 Name char  ; give the seq file an identifier for the user: gre_v1.1, mprage_5-10-25, etc ...
-Possibly other metadata, make it ignored if not included (optional)
+Possibly other metadata (creation information: date, time, user, etc). ignore if not included (optional)
+
+Add additional tags for shapes:
+shape_label char  ; to identify shapes for basic user knowledge and metadata: sinc, gauss, tanh, smsR2, etc...
+shape_type char   ; to identify and/or guide interpreter, rfmag, rfphase, rfmagphase, grad, gradxyz,  ... it is highly unlikely the same shape will be used for multiple purposes.
+
+Designate type of RF pulse:
+excitation, refocus, inversion, etc... ; to help write the correct file for Bruker/Paravision, which constrains pulses based on their utility (excite<=90; refocus<=180; inversion=180)
+rfmagphase: rfmag and rfphase within single shape  ; permit the pulse mag and phase data to be included in a single MAG PHASE line instead of separate shapes
+
+Gradients:
+grad or gradxyz ; to define a single-channel gradient or a 3-column array of simultaneous x, y, z combination (useful for shaped gradient waveforms)
 
 
+
+COMPLICATED:
 Gradient and timing constraints:
 Currently, blocks are permitted to have delays that do not match the duration of the gradients within the block. 
 Why not constrain the blocks to ensure the gradients and durations match?
-The Bruker/Paravision interpreter will have to 
+The Bruker/Paravision interpreter will have to deconstruct gradient durations and timings into shaped arrays. 
