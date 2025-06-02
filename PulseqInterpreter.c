@@ -248,11 +248,12 @@ void UpdateADC(void) {
     }
 
     printf("Done.\n");
-
 }
 
 void UpdateGrad(void) {
 
+
+    printf("\n\nUpdating Gradients, including Trap->Shapes.\n");
     // Convert trapezoids to gradient shapes
     double gradrastertime = 8e-3; // in seconds; for testing make small. 
 
@@ -779,19 +780,19 @@ void WritePPG(const char* ppgfile)
                 fpcnt += fprintf(fid, "grad_shape{");
                 if (SeqBlockTable.gx[b] > 0) {
                     gxind = SeqBlockTable.gx_shape_id[b] - 1;
-                    fprintf(fid, "PVM_ppgGradShape%d * %.3lf, ", gxind, SeqTrapTable.amp_percent[gxind]);
+                    fprintf(fid, "PVM_ppgGradShape%d() * %.3lf, ", gxind, SeqTrapTable.amp_percent[gxind]);
                 } else {
                     fprintf(fid, "0, ");
                 }
                 if (SeqBlockTable.gy[b] > 0) {
                     gyind = SeqBlockTable.gy_shape_id[b] - 1;
-                    fprintf(fid, "PVM_ppgGradShape%d * %.3lf, ", gyind, SeqTrapTable.amp_percent[gyind]);
+                    fprintf(fid, "PVM_ppgGradShape%d() * %.3lf, ", gyind, SeqTrapTable.amp_percent[gyind]);
                 } else {
                     fprintf(fid, "0, ");
                 }
                 if (SeqBlockTable.gz[b] > 0) {
                     gzind = SeqBlockTable.gz_shape_id[b] - 1;
-                    fprintf(fid, "PVM_ppgGradShape%d * %.3lf", gzind, SeqTrapTable.amp_percent[gzind]);
+                    fprintf(fid, "PVM_ppgGradShape%d() * %.3lf", gzind, SeqTrapTable.amp_percent[gzind]);
                 } else {
                     fprintf(fid, "0");
                 }
@@ -833,19 +834,19 @@ void WritePPG(const char* ppgfile)
                 fpcnt += fprintf(fid, " grad_shape{");
                 if (SeqBlockTable.gx[b] > 0) {
                     gxind = SeqBlockTable.gx_shape_id[b] - 1;
-                    fpcnt += fprintf(fid, "PVM_ppgGradShape%d * %.3lf, ", gxind, SeqTrapTable.amp_percent[gxind]);
+                    fpcnt += fprintf(fid, "PVM_ppgGradShape%d() * %.3lf, ", gxind, SeqTrapTable.amp_percent[gxind]);
                 } else {
                     fpcnt += fprintf(fid, "0, ");
                 }
                 if (SeqBlockTable.gy[b] > 0) {
                     gyind = SeqBlockTable.gy_shape_id[b] - 1;
-                    fpcnt += fprintf(fid, "PVM_ppgGradShape%d * %.3lf, ", gyind, SeqTrapTable.amp_percent[gyind]);
+                    fpcnt += fprintf(fid, "PVM_ppgGradShape%d() * %.3lf, ", gyind, SeqTrapTable.amp_percent[gyind]);
                 } else {
                     fpcnt += fprintf(fid, "0, ");
                 }
                 if (SeqBlockTable.gz[b] > 0) {
                     gzind = SeqBlockTable.gz_shape_id[b] - 1;
-                    fpcnt += fprintf(fid, "PVM_ppgGradShape%d * %.3lf", gzind, SeqTrapTable.amp_percent[gzind]);
+                    fpcnt += fprintf(fid, "PVM_ppgGradShape%d() * %.3lf", gzind, SeqTrapTable.amp_percent[gzind]);
                 } else {
                     fpcnt += fprintf(fid, "0");
                 }
@@ -881,19 +882,19 @@ void WritePPG(const char* ppgfile)
 
                 if (SeqBlockTable.gx[b] > 0) {
                     gxind = SeqBlockTable.gx_shape_id[b] - 1;
-                    fpcnt += fprintf(fid, "PVM_ppgGradShape%d * %.3lf, ", gxind, SeqTrapTable.amp_percent[gxind]);
+                    fpcnt += fprintf(fid, "PVM_ppgGradShape%d() * %.3lf, ", gxind, SeqTrapTable.amp_percent[gxind]);
                 } else {
                     fpcnt += fprintf(fid, "0, ");
                 }
                 if (SeqBlockTable.gy[b] > 0) {
                     gyind = SeqBlockTable.gy_shape_id[b] - 1;
-                    fpcnt += fprintf(fid, "PVM_ppgGradShape%d * %.3lf, ", gyind, SeqTrapTable.amp_percent[gyind]);
+                    fpcnt += fprintf(fid, "PVM_ppgGradShape%d() * %.3lf, ", gyind, SeqTrapTable.amp_percent[gyind]);
                 } else {
                     fpcnt += fprintf(fid, "0, ");
                 }
                 if (SeqBlockTable.gz[b] > 0) {
                     gzind = SeqBlockTable.gz_shape_id[b] - 1;
-                    fpcnt += fprintf(fid, "PVM_ppgGradShape%d * %.3lf", gzind, SeqTrapTable.amp_percent[gzind]);
+                    fpcnt += fprintf(fid, "PVM_ppgGradShape%d() * %.3lf", gzind, SeqTrapTable.amp_percent[gzind]);
                 } else {
                     fpcnt += fprintf(fid, "0");
                 }
